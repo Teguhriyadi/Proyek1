@@ -29,6 +29,9 @@
         <div class="card-header">
             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus"></i> Tambah Data
             </button>
+            <a href="" class="btn btn-danger btn-sm pull-right">
+                <i class="fa fa-envelope"></i> Cetak PDF
+            </a>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -76,230 +79,28 @@
                                 <td class="text-center">Rp. <?php echo number_format($data_barang['harga']); ?></td>
                                 <td class="text-center"><?php echo $jumlah_barang; ?></td>
                                 <td class="text-center">
-                                    <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#exampleModalTransaksiMasuk<?php echo $data_barang['kode_barang']; ?>"><i class="fa fa-plus"></i> Tambah
+                                    <button onclick="tambahTransaksiBarang('<?php echo $data_barang['kode_barang']; ?>')" type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#exampleModalTransaksiMasuk"><i class="fa fa-plus"></i> Tambah
                                     </button>
-
-                                    <div class="modal fade" id="exampleModalTransaksiMasuk<?php echo $data_barang['kode_barang']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-plus"></i> Transaksi Masuk</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <form method="POST" action="?page=aksi-tambah-transaksi">
-                                                <?php
-                                                    $kode_barang = $data_barang['kode_barang'];
-                                                    $queryTransaksiMasuk = $con->query("SELECT * FROM barang WHERE kode_barang = '$kode_barang'");
-                                                    foreach ($queryTransaksiMasuk as $data_transaksi_masuk) {
-                                                        # code...
-                                                    }
-                                                ?>
-                                                <div class="modal-body">
-                                                    <div class="form-group">
-                                                        <label class="pull-left" for="kode_barang"> Kode Barang </label>
-                                                        <input type="text" id="kode_barang" class="form-control" name="kode_barang" value="<?php echo $data_transaksi_masuk['kode_barang']; ?>" readonly>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="pull-left" for="nama_barang"> Nama Barang </label>
-                                                        <input type="text" id="nama_barang" class="form-control" name="nama_barang" value="<?php echo $data_transaksi_masuk['nama_barang']; ?>" readonly>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="pull-left" for="jumlah"> QTY </label>
-                                                        <input type="number" id="jumlah" name="stok" class="form-control" placeholder="0">
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal"><i class="fa fa-refresh"></i> Batal</button>
-                                                    <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Tambah </button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
                                 </td>
                                 <td class="text-center">
                                     <?php if ($jumlah_barang == 0) : ?>
                                         <b><i>Stok Kosong</i></b>
                                     <?php else : ?>
-                                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModalTransaksiKeluar<?php echo $data_barang['kode_barang']; ?>"><i class="fa fa-minus"></i> Kurangi
+                                        <button onclick="kurangiTransaksiBarang('<?php echo $data_barang['kode_barang']; ?>')" type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModalTransaksiKeluar"><i class="fa fa-minus"></i> Kurangi
                                         </button>
                                     <?php endif ?>
-
-                                    <div class="modal fade" id="exampleModalTransaksiKeluar<?php echo $data_barang['kode_barang']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-minus"></i> Kurangi Stok Barang</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <form method="POST" action="?page=aksi-keluar-transaksi">
-                                                <?php
-                                                    $kode_barang = $data_barang['kode_barang'];
-                                                    $queryTransaksiKeluar = $con->query("SELECT * FROM barang WHERE kode_barang = '$kode_barang' ");
-                                                    foreach ($queryTransaksiKeluar as $data_transaksi_keluar) {
-                                                        # code...
-                                                    }
-                                                ?>
-                                                <div class="modal-body">
-                                                    <div class="form-group">
-                                                        <label class="pull-left" for="kode_barang"> Kode Barang </label>
-                                                        <input type="text" class="form-control" id="kode_barang" name="kode_barang" placeholder="Masukkan Kode Barang" autocomplete="off" value="<?php echo $data_transaksi_keluar['kode_barang'] ?>" readonly>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="pull-left" for="nama_barang"> Nama Barang </label>
-                                                        <input type="text" class="form-control" id="nama_barang" name="nama_barang" placeholder="Masukkan Nama Barang" value="<?php echo $data_transaksi_keluar['nama_barang']; ?>" readonly>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="pull-left" for="stok"> QTY </label>
-                                                        <input type="number" class="form-control" id="stok" name="stok" placeholder="0" autocomplete="off" min="1">
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal"><i class="fa fa-refresh"></i> Batal</button>
-                                                    <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-save"></i> Simpan </button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
                                 </td>
                                 <td class="text-center">
-                                    <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModalUpdate<?php echo $data_barang['kode_barang']; ?>"><i class="fa fa-pencil"></i> Edit
+                                    <button onclick="editBarang('<?php echo $data_barang['kode_barang'] ?>')" type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModalUpdate"><i class="fa fa-pencil"></i> Edit
                                     </button>
-
-                                    <!-- Edit Data -->
-                                    <div class="modal fade" id="exampleModalUpdate<?php echo $data_barang['kode_barang']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-plus"></i> Edit Data Barang</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <form method="POST" action="?page=aksi-edit-barang">
-                                                    <?php
-                                                        $kode_barang = $data_barang['kode_barang'];
-                                                        $queryBarang = $con->query("SELECT * FROM barang WHERE kode_barang = '$kode_barang'");
-                                                        foreach ($queryBarang as $barang_data) {
-
-                                                        }
-                                                    ?>
-                                                    <div class="modal-body">
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
-                                                                    <label class="pull-left" for="kode_barang"> Kode Barang </label>
-                                                                    <input type="text" class="form-control" id="kode_barang" name="kode_barang" placeholder="Masukkan Kode Barang" autocomplete="off" value="<?php echo $barang_data['kode_barang']; ?>" readonly>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
-                                                                    <label class="pull-left" for="id_kategori"> Kategori </label>
-                                                                    <select id="id_kategori" name="id_kategori" class="form-control">
-                                                                        <option value="">- Pilih -</option>
-                                                                        <?php
-                                                                            $queryKategori = $con->query("SELECT * FROM kategori ORDER BY nama_kategori ASC");
-                                                                        ?>
-                                                                        <?php foreach ($queryKategori as $kategori_data) : ?>
-                                                                            <?php if ($barang_data['id_kategori'] == $kategori_data['id_kategori']) : ?>
-                                                                            <option value="<?php echo $kategori_data['id_kategori']; ?>" selected>
-                                                                                <?php echo $kategori_data['nama_kategori']; ?>
-                                                                            </option>
-                                                                            <?php else : ?>
-                                                                            <option value="<?php echo $kategori_data['id_kategori']; ?>">
-                                                                                <?php echo $kategori_data['nama_kategori']; ?>
-                                                                            </option>
-                                                                            <?php endif ?> 
-                                                                        <?php endforeach ?>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label class="pull-left" for="nama_barang"> Nama Barang </label>
-                                                            <input type="text" class="form-control" id="nama_barang" name="nama_barang" placeholder="Masukkan Nama Barang" autocomplete="off" value="<?php echo $barang_data['nama_barang']; ?>">
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
-                                                                    <label class="pull-left" for="harga"> Harga </label>
-                                                                    <input type="number" class="form-control" id="harga" name="harga" placeholder="0" autocomplete="off" value="<?php echo $barang_data['harga']; ?>">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
-                                                                    <label class="satuan"> Satuan </label>
-                                                                    <select id="satuan" name="satuan" class="form-control">
-                                                                    <?php if ($barang_data['satuan'] == "pcs") : ?>
-                                                                        <option value="">- Pilih -</option>
-                                                                        <option value="pcs">PCS</option selected>
-                                                                        <option value="kg">KG</option>
-                                                                        <option value="ml">ML</option>
-                                                                        <option value="setengah">1/2</option>
-                                                                        <option value="tiga_per_empat">3/4</option>
-                                            <?php elseif ($barang_data['satuan'] == "kg") : ?>
-                                                <option value="">- Pilih -</option>
-                                                                        <option value="pcs">PCS</option>
-                                                                        <option value="kg" selected>KG</option>
-                                                                        <option value="ml">ML</option>
-                                                                        <option value="setengah">1/2</option>
-                                                                        <option value="tiga_per_empat">3/4</option>
-                                            <?php elseif ($barang_data['satuan'] == "ml") : ?>
-                                                <option value="">- Pilih -</option>
-                                                                        <option value="pcs">PCS</option>
-                                                                        <option value="kg">KG</option>
-                                                                        <option value="ml" selected>ML</option>
-                                                                        <option value="setengah">1/2</option>
-                                                                        <option value="tiga_per_empat">3/4</option>
-                                                                        <?php elseif ($barang_data['satuan'] == "setengah") : ?>
-                                                                        <option value="">- Pilih -</option>
-                                                                        <option value="pcs">PCS</option>
-                                                                        <option value="kg">KG</option>
-                                                                        <option value="ml">ML</option>
-                                                                        <option value="setengah" selected>1/2</option>
-                                                                        <option value="tiga_per_empat">3/4</option>
-                                                                        <?php elseif ($barang_data['satuan'] == "tiga_per_empat") : ?>
-                                                                        <option value="">- Pilih -</option>
-                                                                        <option value="pcs">PCS</option>
-                                                                        <option value="kg">KG</option>
-                                                                        <option value="ml">ML</option>
-                                                                        <option value="setengah">1/2</option>
-                                                                        <option value="tiga_per_empat" selected>3/4</option>
-                                                                        <?php else : ?>
-                                                                        <option value="">- Pilih -</option>
-                                                                        <option value="pcs">PCS</option>
-                                                                        <option value="kg">KG</option>
-                                                                        <option value="ml">ML</option>
-                                                                        <option value="setengah">1/2</option>
-                                                                        <option value="tiga_per_empat">3/4</option>
-                                                                        <?php endif ?>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label class="pull-left" for="keterangan"> Keterangan </label>
-                                                            <textarea class="form-control" id="keterangan" name="keterangan" rows="4" placeholder="Masukkan Keterangan"><?php echo $barang_data['keterangan']; ?></textarea>
-                                                        </div>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal"><i class="fa fa-refresh"></i> Batal</button>
-                                                        <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-save"></i> Simpan </button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
                                     <!-- END -->
 
-                                    <a onclick="return confirm('Yakin ? Anda Ingin Menghapus Data Ini ?')" href="?page=hapus-barang&kode_barang=<?php echo $barang_data['kode_barang']; ?>" class="btn btn-danger btn-sm">
-                                        <i class="fa fa-trash-o"></i> Hapus
-                                    </a>
+                                    <form class="d-inline" method="POST" action="?page=hapus-barang">
+                                        <input type="hidden" name="kode_barang" value="<?php echo $data_barang['kode_barang']; ?>">
+                                        <button onclick="return confirm('Yakin ? Anda Ingin Menghapus Data Ini ?')" name="btn-hapus" type="submit" class="btn btn-danger btn-sm">
+                                            <i class="fa fa-trash-o"></i> Hapus
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                             <?php
@@ -310,7 +111,6 @@
                 </table>
             </div>
         </div>
-        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
     </div>
 </div>
 
@@ -382,10 +182,120 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal"><i class="fa fa-refresh"></i> Batal</button>
-                    <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Tambah </button>
+                    <button type="submit" name="btn-simpan" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Tambah </button>
                 </div>
             </form>
         </div>
     </div>
 </div>
 <!-- END -->
+
+<!-- Tambah Data -->
+<div class="modal fade" id="exampleModalUpdate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-pencil"></i> Edit Data Barang</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="POST" action="?page=aksi-edit-barang">
+                <div class="modal-body" id="modal-update">
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal"><i class="fa fa-refresh"></i> Batal</button>
+                    <button type="submit" name="btn-edit" class="btn btn-primary btn-sm"><i class="fa fa-save"></i> Simpan </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- END -->
+
+<!-- Transaksi Masuk -->
+<div class="modal fade" id="exampleModalTransaksiMasuk" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-plus"></i> Transaksi Masuk Barang</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="POST" action="?page=aksi-tambah-transaksi">
+                <div class="modal-body" id="modal-transaksi-masuk">
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal"><i class="fa fa-refresh"></i> Batal</button>
+                    <button type="submit" name="btn-tambah" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Tambah </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- END -->
+
+<!-- Transaksi Masuk -->
+<div class="modal fade" id="exampleModalTransaksiKeluar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-minus"></i> Transaksi Keluar Barang</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="POST" action="?page=aksi-keluar-transaksi">
+                <div class="modal-body" id="modal-transaksi-keluar">
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal"><i class="fa fa-refresh"></i> Batal</button>
+                    <button type="submit" name="btn-kurangi" class="btn btn-primary btn-sm"><i class="fa fa-minus"></i> Kurangi </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- END -->
+
+<script type="text/javascript">
+    function editBarang(kode_barang) {
+        $.ajax({
+            url : "http://localhost/Proyek1/admin/page/barang/edit-barang.php",
+            type : "POST",
+            data : { kode_barang : kode_barang },
+            success : function (data) {
+                $("#modal-update").html(data);
+                return true;
+            }
+        })
+    }
+
+    function tambahTransaksiBarang(kode_barang) {
+        $.ajax({
+            url : "http://localhost/Proyek1/admin/page/barang/transaksi-masuk.php",
+            type : "POST",
+            data : { kode_barang : kode_barang },
+            success : function (data) {
+                $("#modal-transaksi-masuk").html(data);
+                return true;
+            }
+        })
+    }
+
+    function kurangiTransaksiBarang(kode_barang) {
+        $.ajax({
+            url : "http://localhost/Proyek1/admin/page/barang/transaksi-keluar.php",
+            type : "POST",
+            data : { kode_barang : kode_barang },
+            success : function (data) {
+                $("#modal-transaksi-keluar").html(data);
+                return true;
+            }
+        })
+    }
+</script>

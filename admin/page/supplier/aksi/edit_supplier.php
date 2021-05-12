@@ -1,5 +1,11 @@
 <?php
 
+    if (!isset($_POST['btn-edit'])) {
+        echo "<script>alert('Maaf, Anda Tidak Boleh Akses Sembarangan');</script>";
+        echo "<script>location='?page=supplier';</script>";
+        exit;
+    }
+
     $kode_supplier = $_POST['kode_supplier'];
     $nama_supplier = $_POST['nama_supplier'];
     $no_telepon = $_POST['no_telepon'];

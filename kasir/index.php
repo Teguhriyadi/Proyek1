@@ -1,6 +1,6 @@
 <?php
-  session_start();
-  include 'config/koneksi.php';
+  
+  include '../config/koneksi.php';
 ?>
 <!doctype html>
 <html lang="en">
@@ -12,7 +12,7 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-  <title>.: IO - Keeper | <?php require 'mod/title.php'; ?> :.</title>
+  <title>.: IO - Keeper</title>
   <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
@@ -35,30 +35,20 @@
           <li class="nav-item">
             <a class="nav-link" href="?page=contact">Contact</a>
           </li>
-          <?php if (isset($_SESSION['login'])) : ?>
-            <li class="nav-item">
-              <a class="nav-link" href="?page=informasi">Informasi</a>
-            </li>
-          <?php else : ?>
-            
-          <?php endif ?>
         </ul>
 
-        <?php if (!isset($_SESSION['login'])) : ?>
         <form class="form-inline my-2 my-lg-0">
           <button type="button" class="btn btn-success my-2 my-sm-0" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus"></i> Masuk / Login
         </button>
         </form>
-        <?php else : ?>
         <form class="form-inline my-2 my-lg-0">
           <a class="btn btn-success my-2 my-sm-0" href="logout.php"><i class="fa fa-plus"></i> Logout </a>
         </form>
-        <?php endif ?>
       </div>
     </div>
   </nav>
 
-  <?php require 'mod/halaman.php'; ?>
+  Hello
 
 
   <footer class="warna-bg">

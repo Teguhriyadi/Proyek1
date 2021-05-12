@@ -62,12 +62,20 @@
                                     <?php endif ?>
                                 </td>
                                 <td class="text-center">
-                                    <a href="" class="btn btn-warning btn-sm">
+                                    <button onclick="editUsers(<?php echo $data_users['id']; ?>)" type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModalUpdate">
                                         <i class="fa fa-pencil"></i> Edit
-                                    </a>
-                                    <a onclick="return confirm('Yakin ? Anda Ingin Menghapus Data Ini ?')" href="?page=hapus-users&id=<?php echo $data_users['id']; ?>" class="btn btn-danger btn-sm">
-                                        <i class="fa fa-trash-o"></i> Hapus
-                                    </a>
+                                    </button>
+                                    
+                                    <?php if ($_SESSION['username'] == $data_users['username'] ) : ?>
+                                        
+                                    <?php else : ?>
+                                        <form class="d-inline" method="POST" action="?page=hapus-users">
+                                            <input type="hidden" name="id" value="<?php echo $data_users['id']; ?>">
+                                            <button onclick="return confirm ('Yakin ? Anda Ingin Menghapus Data Ini ?')" type="submit" name="btn-hapus" class="btn btn-danger btn-sm">
+                                                <i class="fa fa-trash-o"></i> Hapus
+                                            </button>
+                                        </form>
+                                    <?php endif ?>
                                 </td>
                             </tr>
                         <?php endforeach ?>
@@ -75,7 +83,6 @@
                 </table>
             </div>
         </div>
-        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
     </div>
 </div>
 
@@ -104,6 +111,10 @@
                         <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan Password" autocomplete="off">
                     </div>
                     <div class="form-group">
+                        <label for="confirm_password"> Konfirmasi Password </label>
+                        <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Masukkan Konfirmasi Password" autocomplete="off">
+                    </div>
+                    <div class="form-group">
                         <label for="level"> Level </label>
                         <select class="form-control" id="level" name="level">
                             <option value="">- Pilih -</option>
@@ -122,3 +133,41 @@
     </div>
 </div>
 <!-- END -->
+
+<!-- Edit Data -->
+<div class="modal fade" id="exampleModalUpdate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-pencil"></i> Edit Data Users</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="POST" action="?page=aksi-edit-users">
+                <div class="modal-body" id="modal-update">
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal"><i class="fa fa-refresh"></i> Batal</button>
+                    <button type="submit" name="btn-edit" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Tambah </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- END -->
+
+<script type="text/javascript">
+    function editUsers(id) {
+        $.ajax({
+            url : "http://localhost/Proyek1/admin/page/users/edit-users.php",
+            type : "POST",
+            data : { id : id },
+            success : function (data) {
+                $("#modal-update").html(data);
+                return true;
+            }
+        })
+    }
+</script>

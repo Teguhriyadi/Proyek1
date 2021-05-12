@@ -1,4 +1,10 @@
 <?php
+    
+    if (!isset($_POST['btn-edit'])) {
+        echo "<script>alert('Maaf, Anda Tidak Boleh Akses Sembarangan');</script>";
+        echo "<script>location='?page=kategori';</script>";
+        exit;
+    }
 
     $id_kategori = $_POST['id_kategori'];
     $nama_kategori = $_POST['nama_kategori'];

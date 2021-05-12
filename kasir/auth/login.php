@@ -1,11 +1,3 @@
-<?php 
-    session_start();
-
-    if(isset($_SESSION['login-admin'])){
-        echo "<script>alert('Maaf, Harus Logout Terlebih Dahulu');</script>";
-        echo "<script>location='../?page=dashboard';</script>";
-    }
-?>
 <!DOCTYPE html>
 <html>
     <head>

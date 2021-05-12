@@ -1,5 +1,11 @@
 <?php
 
+    if (!isset($_POST['btn-edit'])) {
+        echo "<script>alert('Maaf, Anda Tidak Boleh Akses Sembarangan');</script>";
+        echo "<script>location='?page=transaksi';</script>";
+        exit;
+    }
+
     $id_transaksi = $_POST['id_transaksi'];
     $kode_barang = $_POST['kode_barang'];
     $stok = $_POST['stok'];

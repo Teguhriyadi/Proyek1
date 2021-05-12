@@ -1,5 +1,4 @@
 <?php
-    
     if (isset($_GET['page'])) {
         $page = $_GET['page'];
     } else {
@@ -50,10 +49,6 @@
         
         case 'supplier' :
             include 'page/supplier/data_supplier.php';
-            break;
-
-        case 'tambah-supplier' :
-            include 'page/supplier/tambah_supplier.php';
             break;
         
         case 'aksi-simpan-supplier' :
@@ -152,7 +147,7 @@
             break;
 
         case 'hapus-transaksi' :
-            include 'page/transaksi/hapus_transaksi.php';
+            include 'page/transaksi/aksi/hapus_transaksi.php';
             break;
         // END
 

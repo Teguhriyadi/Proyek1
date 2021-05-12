@@ -206,7 +206,7 @@ while($row = $produk->fetch_array()){
 							<tbody>
 								<?php 
 									$no = 0;
-									$query = $con->query("SELECT * FROM users ORDER BY last_login DESC");
+									$query = $con->query("SELECT * FROM users ORDER BY last_login DESC LIMIT 5");
 								?>
 								<?php foreach ($query as $data_users) : ?>
 									<tr>

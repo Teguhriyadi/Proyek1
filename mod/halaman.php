@@ -20,6 +20,18 @@
 			include 'page/kontak.php';
 			break;
 		
+		case 'aksi-auth-login':
+			include 'do_auth_login.php';
+			break;
+
+		case 'informasi':
+			include 'page/informasi.php';
+			break;
+
+		case 'aksi-simpan-informasi':
+			include 'page/aksi/simpan-informasi.php';
+			break;
+
 		default:
 			echo "404 Not Found";
 			break;

@@ -26,12 +26,12 @@
 			$row = mysqli_fetch_assoc($result);
 		
 			if (password_verify($password, $row['password'])) {
-				$_SESSION['login-admin'] = true;
+				$_SESSION['login-kasir'] = true;
 				$_SESSION['username'] = $username;
-				$_SESSION['level'] = "admin";
+				$_SESSION['level'] = "kasir";
 				// alihkan ke halaman dashboard admin
 		        echo "<script>alert('Berhasil Login');</script>";
-		        echo "<script>location='../../admin/?page=dashboard';</script>";
+		        echo "<script>location='../index.php';</script>";
 			} else {
 				echo "<script>alert('Maaf, Anda Salah Menginputkan Data');</script>";
 				echo "<script>location='login.php';</script>";

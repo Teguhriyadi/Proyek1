@@ -1,15 +1,12 @@
 <?php 
-
-	if (!isset($_POST['login'])) {
+	if (!isset($_POST['btn-login'])) {
 		echo "<script>alert('Silahkan Login terlebih dahulu');</script>";
-		echo "<script>location='login.php';</script>";
-	} else if (isset($_POST['login'])) {
-		// mengaktifkan session pada php
-		session_start();
+		echo "<script>location='index.php';</script>";
+	} else if (isset($_POST['btn-login'])) {
 
 		// menghubungkan php dengan koneksi database
-		include '../../config/koneksi.php';
-
+		include 'config/koneksi.php';
+		//session_start();
 		// menangkap data yang dikirim dari form login
 		$username = $_POST['username'];
 		$password = $_POST['password'];
@@ -26,15 +23,12 @@
 			$row = mysqli_fetch_assoc($result);
 		
 			if (password_verify($password, $row['password'])) {
-				$_SESSION['login-admin'] = true;
-				$_SESSION['username'] = $username;
-				$_SESSION['level'] = "admin";
+				$_SESSION['login'] = true;
+				$_SESSION['user'] = $username;
+				$_SESSION['level'] = "informan";
 				// alihkan ke halaman dashboard admin
 		        echo "<script>alert('Berhasil Login');</script>";
-		        echo "<script>location='../../admin/?page=dashboard';</script>";
-			} else {
-				echo "<script>alert('Maaf, Anda Salah Menginputkan Data');</script>";
-				echo "<script>location='login.php';</script>";
+		        echo "<script>location='?page=home';</script>";
 			}
 		}
 

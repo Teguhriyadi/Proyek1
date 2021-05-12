@@ -4,11 +4,11 @@ session_start();
 include '../config/koneksi.php'; 
 
   // cek apakah yang mengakses halaman ini sudah login
-if(!isset($_SESSION['level'])){
+if(!isset($_SESSION['login-admin'])){
   echo "<script>alert('Harus Login Terlebih Dahulu');</script>";
   echo "<script>location='auth/login.php';</script>";
 } else if ($_SESSION['level']!="admin") {
-  header("location:index.php?pesan=gagal");
+  echo "<script>location='../index.php';</script>";
 }
 
 ?>
@@ -31,7 +31,7 @@ if(!isset($_SESSION['level'])){
   <link href="template/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
   <!-- Custom styles for this template-->
   <link href="template/css/sb-admin.css" rel="stylesheet">
-  <script src="Chart.js"></script>
+  <script src="js/Chart.js"></script>
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -73,16 +73,10 @@ if(!isset($_SESSION['level'])){
             <span class="nav-link-text">Transaksi</span>
           </a>
         </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Supplier">
-          <a class="nav-link" href="?page=transaksi">
-            <i class="fa fa-fw fa-area-chart"></i>
-            <span class="nav-link-text">Report</span>
-          </a>
-        </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
-            <i class="fa fa-fw fa-wrench"></i>
-            <span class="nav-link-text">Components</span>
+            <i class="fa fa-fw fa-area-chart"></i>
+            <span class="nav-link-text">Report</span>
           </a>
           <ul class="sidenav-second-level collapse" id="collapseComponents">
             <li>
@@ -128,12 +122,23 @@ if(!isset($_SESSION['level'])){
               </span>
             </span>
             <span class="indicator text-primary d-none d-lg-block">
-              <i class="fa fa-fw fa-circle"></i>
+              <?php
+                $sql = "SELECT * FROM informasi WHERE status = 0 ";
+                $query = mysqli_query($con,$sql);
+                $count = mysqli_num_rows($query);
+              ?>
+
+              <?php if ($count == 0) : ?>
+
+              <?php else : ?>
+                <i class="fa fa-fw fa-circle"></i>
+              <?php endif ?>
+              
             </span>
           </a>
           <div class="dropdown-menu" aria-labelledby="messagesDropdown">
             <?php
-            $sql = "SELECT * FROM informasi";
+            $sql = "SELECT * FROM informasi WHERE status = 0 ";
             $query = mysqli_query($con,$sql);
             $count = mysqli_num_rows($query);
 
@@ -163,13 +168,39 @@ if(!isset($_SESSION['level'])){
           </form>
         </li>
         <li class="nav-item">
-          <a onclick="return confirm('Yakin ? Ingin Logout ?')" class="nav-link" href="?page=logout">
-            <i class="fa fa-fw fa-sign-out"></i>Logout
+          <a class="nav-link" data-toggle="modal" data-target="#exampleModalLogout"><i class="fa fa-sign-out"></i> Logout
           </a>
         </li>
       </ul>
     </div>
   </nav>
+
+  <!-- Logout -->
+    <div class="modal fade" id="exampleModalLogout" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-sign-out"></i> Logout</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form id="form" method="POST" action="?page=logout">
+            <div class="modal-body">
+              <div class="form-group">
+                <p>Apakah anda yakin untuk logout ?</p>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal"><i class="fa fa-refresh"></i> Batal</button>
+              <button type="submit" name="btn-logout-admin" class="btn btn-primary btn-sm"><i class="fa fa-thumbs-up"></i> ya </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- END -->
+
   <div class="content-wrapper">
     <?php require 'mod/halaman.php'; ?>
     <!-- /.container-fluid-->
