@@ -24,24 +24,12 @@
             include 'page/kategori/data_kategori.php';
             break;
 
-        case 'tambah-kategori' :
-            include 'page/kategori/tambah_kategori.php';
-            break;
-        
-        case 'aksi-simpan-kategori' :
-            include 'page/kategori/aksi/simpan_kategori.php';
-            break;
-
         case 'edit-kategori' :
             include 'page/kategori/edit_kategori.php';
             break;
         
         case 'aksi-edit-kategori' :
             include 'page/kategori/aksi/edit_kategori.php';
-            break;
-        
-        case 'hapus-kategori' :
-            include 'page/kategori/aksi/hapus_kategori.php';
             break;
         // END
 
@@ -50,10 +38,6 @@
         case 'supplier' :
             include 'page/supplier/data_supplier.php';
             break;
-        
-        case 'aksi-simpan-supplier' :
-            include 'page/supplier/aksi/simpan_supplier.php';
-            break;
 
         case 'edit-supplier' :
             include 'page/supplier/edit_supplier.php';
@@ -61,10 +45,6 @@
         
         case 'aksi-edit-supplier' :
             include 'page/supplier/aksi/edit_supplier.php';
-            break;
-        
-        case 'hapus-supplier' :
-            include 'page/supplier/aksi/hapus_supplier.php';
             break;
             
         // END
@@ -75,24 +55,12 @@
             include 'page/barang/data_barang.php';
             break;
 
-        case 'tambah-barang' :
-            include 'page/barang/tambah_barang.php';
-            break;
-        
-        case 'aksi-simpan-barang' :
-            include 'page/barang/aksi/simpan_barang.php';
-            break;
-
         case 'edit-barang' :
             include 'page/barang/edit_barang.php';
             break;
         
         case 'aksi-edit-barang' :
             include 'page/barang/aksi/edit_barang.php';
-            break;
-        
-        case 'hapus-barang' :
-            include 'page/barang/aksi/hapus_barang.php';
             break;
             
         // END
@@ -103,24 +71,12 @@
             include 'page/users/data_users.php';
             break;
 
-        case 'tambah-users' :
-            include 'page/users/tambah_users.php';
-            break;
-        
-        case 'aksi-simpan-users' :
-            include 'page/users/aksi/simpan_users.php';
-            break;
-
         case 'edit-users' :
             include 'page/users/edit_users.php';
             break;
         
         case 'aksi-edit-users' :
             include 'page/users/aksi/edit_users.php';
-            break;
-        
-        case 'hapus-users' :
-            include 'page/users/aksi/hapus_users.php';
             break;
             
         // END
@@ -145,10 +101,6 @@
         case 'aksi-edit-transaksi' :
             include 'page/transaksi/aksi/edit_transaksi.php';
             break;
-
-        case 'hapus-transaksi' :
-            include 'page/transaksi/aksi/hapus_transaksi.php';
-            break;
         // END
 
         // Informasi
@@ -164,6 +116,18 @@
             include 'page/informasi/aksi/cancel-informasi.php';
             break;
         // END
+
+        // Cetak Barang
+        case 'cetak-barang':
+            include 'page/cetak/cetak-barang.php';
+            break;
+        // END
+
+        // Saran & Masukan
+        case 'saran':
+            include 'page/saran/data_saran.php';
+            break;
+        // END
         
         // Logout
         case 'logout' :
@@ -171,7 +135,8 @@
             break;
             
         default:
-            echo "404 Not Found";
+            echo "<script>alert('Maaf, Halaman Tidak Ada');</script>";
+            echo "<script>window.location.replace('?page=dashboard');</script>";
             break;
     }
 

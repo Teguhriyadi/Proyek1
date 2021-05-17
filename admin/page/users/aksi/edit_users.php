@@ -6,6 +6,40 @@
         exit;
     }
 
+?>
+
+<script type="text/javascript">
+    function berhasil() {
+        setTimeout(function() {
+            swal({
+                title : 'BERHASIL',
+                text : 'Data Berhasil di Ubah',
+                type : 'success',
+                showConfirmationButton : true
+            });
+        });
+        window.setTimeout(function() {
+            window.location.replace("?page=users");
+        }, 3000);
+    }
+
+    function gagal() {
+        setTimeout(function() {
+            swal({
+                title : 'GAGAL',
+                text : 'Data Gagal di Ubah',
+                type : 'error',
+                showConfirmationButton : true
+            });
+        });
+        window.setTimeout(function() {
+            window.location.replace("?page=users");
+        }, 3000);
+    }
+</script>
+
+<?php
+
     $id = $_POST['id'];
     $username = $_POST['username'];
     $email = $_POST['email'];
@@ -27,13 +61,9 @@
     $query = $con->query("UPDATE users SET username = '$username', email = '$email', password = '$password_baru', updated_at = '$updated_at', level = '$level' WHERE id = $id ");
 
     if ($query != 0) {
-        echo "<script>alert('Data Berhasil di Ubah');</script>";
-        echo "<script>location='?page=users';</script>";
-        exit;
+        echo "<script>berhasil();</script>";
     } else {
-        echo "<script>alert('Data Gagal di Ubah');</script>";
-        echo "<script>location='?page=users';</script>";
-        exit;
+        echo "<script>gagal();</script>";
     }
 
 ?>

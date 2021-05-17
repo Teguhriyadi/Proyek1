@@ -1,3 +1,73 @@
+<script type="text/javascript">
+    function editUsers(id) {
+        $.ajax({
+            url : "http://localhost/Proyek1/admin/page/users/edit-users.php",
+            type : "POST",
+            data : { id : id },
+            success : function (data) {
+                $("#modal-update").html(data);
+                return true;
+            }
+        })
+    }
+
+    function berhasil() {
+        setTimeout(function() {
+            swal({
+                title : 'BERHASIL',
+                text : 'Data Berhasil di Tambahkan',
+                type : 'success',
+                showConfirmationButton : true
+            });
+        });
+        window.setTimeout(function() {
+            window.location.replace("?page=users");
+        }, 3000);
+    }
+
+    function gagal() {
+        setTimeout(function() {
+            swal({
+                title : 'GAGAL',
+                text : 'Data Gagal di Tambahkan',
+                type : 'error',
+                showConfirmationButton : true
+            });
+        });
+        window.setTimeout(function() {
+            window.location.replace("?page=users");
+        }, 3000);
+    }
+
+    function berhasil_hapus() {
+        setTimeout(function() {
+            swal({
+                title : 'BERHASIL',
+                text : 'Data Berhasil di Hapus',
+                type : 'success',
+                showConfirmationButton : true
+            });
+        });
+        window.setTimeout(function() {
+            window.location.replace("?page=users");
+        }, 3000);
+    }
+
+    function gagal_hapus() {
+        setTimeout(function() {
+            swal({
+                title : 'GAGAL',
+                text : 'Data Gagal di Hapus',
+                type : 'error',
+                showConfirmationButton : true
+            });
+        });
+        window.setTimeout(function() {
+            window.location.replace("?page=users");
+        }, 3000);
+    }
+</script>
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
@@ -69,7 +139,7 @@
                                     <?php if ($_SESSION['username'] == $data_users['username'] ) : ?>
                                         
                                     <?php else : ?>
-                                        <form class="d-inline" method="POST" action="?page=hapus-users">
+                                        <form class="d-inline" method="POST">
                                             <input type="hidden" name="id" value="<?php echo $data_users['id']; ?>">
                                             <button onclick="return confirm ('Yakin ? Anda Ingin Menghapus Data Ini ?')" type="submit" name="btn-hapus" class="btn btn-danger btn-sm">
                                                 <i class="fa fa-trash-o"></i> Hapus
@@ -96,7 +166,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST" action="?page=aksi-simpan-users">
+            <form method="POST">
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="username"> Username </label>
@@ -126,7 +196,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal"><i class="fa fa-refresh"></i> Batal</button>
-                    <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Tambah </button>
+                    <button type="submit" name="btn-simpan" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Tambah </button>
                 </div>
             </form>
         </div>
@@ -150,7 +220,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal"><i class="fa fa-refresh"></i> Batal</button>
-                    <button type="submit" name="btn-edit" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Tambah </button>
+                    <button type="submit" name="btn-edit" class="btn btn-primary btn-sm"><i class="fa fa-save"></i> Simpan </button>
                 </div>
             </form>
         </div>
@@ -158,16 +228,59 @@
 </div>
 <!-- END -->
 
-<script type="text/javascript">
-    function editUsers(id) {
-        $.ajax({
-            url : "http://localhost/Proyek1/admin/page/users/edit-users.php",
-            type : "POST",
-            data : { id : id },
-            success : function (data) {
-                $("#modal-update").html(data);
-                return true;
-            }
-        })
+<!-- Fungsi Tambah Data -->
+<?php
+    if (isset($_POST['btn-simpan'])) {
+        date_default_timezone_set('Asia/Jakarta');
+        $username = strtolower(stripslashes($_POST['username']));
+        $email = $_POST['email'];
+        $password = mysqli_real_escape_string($con, $_POST['password']);
+        $confirm_password = mysqli_real_escape_string($con, $_POST['confirm_password']);
+        $created_at = date("Y-m-d H:i:s");
+        $updated_at = date("Y-m-d H:i:s");
+        $last_login = NULL;
+        $level = $_POST['level'];
+
+        // cek username sudah ada atau belum
+        $result = $con->query("SELECT username FROM users WHERE username = '$username'");
+
+        if (mysqli_fetch_assoc($result) > 0) {
+            echo "<script>alert('Username sudah terdaftar');</script>";
+            echo "<script>location='?page=users';</script>";
+        }
+
+        if ($password !== $confirm_password) {
+            echo "<script>alert('Konfirmasi Password Tidak Sesuai');</script>";
+            echo "<script>location='?page=users';</script>";
+        }
+
+        // enkripsi password
+        $password = password_hash($password, PASSWORD_DEFAULT);
+
+        // tambahkan userbaru ke database
+        $query = $con->query("INSERT INTO users VALUES ('','$username', '$email', '$password', '$created_at', '$updated_at','$last_login','$level') ");
+
+        if ($query != 0) {
+            echo "<script>berhasil();</script>";
+        } else {
+            echo "<script>gagal();</script>";
+        }
     }
-</script>
+?>
+<!-- END -->
+
+<!-- Fungsi Hapus Data -->
+<?php
+    if (isset($_POST['btn-hapus'])) {
+        $id = $_POST['id'];
+
+        $query = $con->query("DELETE FROM users WHERE id = $id");
+
+        if ($query != 0) {
+            echo "<script>berhasil_hapus();</script>";
+        } else {
+            echo "<script>gagal_hapus();</script>";
+        }
+    }
+?>
+<!-- END -->

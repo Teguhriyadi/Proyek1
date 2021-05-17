@@ -1,3 +1,44 @@
+<script type="text/javascript">
+    function editTransaksi(id_transaksi) {
+        $.ajax({
+            url : "http://localhost/Proyek1/admin/page/transaksi/edit-transaksi.php",
+            type : "POST",
+            data : { id_transaksi : id_transaksi },
+            success : function (data) {
+                $("#modal-update").html(data);
+                return true;
+            }
+        })
+    }
+
+    function berhasil_hapus() {
+        setTimeout(function() {
+            swal({
+                title : 'BERHASIL',
+                text : 'Data Berhasil di Hapus',
+                type : 'success',
+                showConfirmationButton : true
+            });
+        });
+        window.setTimeout(function() {
+            window.location.replace("?page=transaksi");
+        }, 3000);
+    }
+
+    function gagal_hapus() {
+        setTimeout(function() {
+            swal({
+                title : 'GAGAL',
+                text : 'Data Gagal di Hapus',
+                type : 'error',
+                showConfirmationButton : true
+            });
+        });
+        window.setTimeout(function() {
+            window.location.replace("?page=transaksi");
+        }, 3000);
+    }
+</script>
 
 <div class="container-fluid">
     <div class="row">
@@ -73,7 +114,7 @@
                                     <button onclick="editTransaksi(<?php echo $data_transaksi_barang['id_transaksi']; ?>)" type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModalUpdate"><i class="fa fa-pencil"></i> Edit
                                     </button>
 
-                                    <form class="d-inline" method="POST" action="?page=hapus-transaksi">
+                                    <form class="d-inline" method="POST">
                                         <input type="hidden" name="id_transaksi" value="<?php echo $data_transaksi_barang['id_transaksi']; ?>">
                                         <button onclick="return confirm('Yakin ? Anda Ingin Menghapus Data Ini ?')" name="btn-hapus" type="submit" class="btn btn-danger btn-sm">
                                             <i class="fa fa-trash-o"></i> Hapus
@@ -113,16 +154,18 @@
 </div>
 <!-- END -->
 
-<script type="text/javascript">
-    function editTransaksi(id_transaksi) {
-        $.ajax({
-            url : "http://localhost/Proyek1/admin/page/transaksi/edit-transaksi.php",
-            type : "POST",
-            data : { id_transaksi : id_transaksi },
-            success : function (data) {
-                $("#modal-update").html(data);
-                return true;
-            }
-        })
+<!-- Fungsi Hapus Data -->
+<?php
+    if (isset($_POST['btn-hapus'])) {
+        $id_transaksi = $_POST['id_transaksi'];
+
+        $query = $con->query("DELETE FROM transaksi_barang WHERE id_transaksi = $id_transaksi");
+
+        if ($query != 0) {
+            echo "<script>berhasil_hapus();</script>";
+        } else {
+            echo "<script>gagal_hapus();</script>";
+        }
     }
-</script>
+?>
+<!-- END -->

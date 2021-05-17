@@ -1,15 +1,8 @@
 <section class="jumbotron-bg">
 	<div class="jumbotron warna-bg text-white">
 		<div class="container">
-			<h1 class="display-4">Profil,</h1>
-			<p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-			</p>
-			<a class="btn btn-primary btn-lg" href="#" role="button">Selengkapnya...</a>
+			<h1 class="display-4">Tentang Kami</h1>
+			<p class="lead text-justify">Aplikasi ini di buat dengan tujuan untuk mempermudah mitra dalam melakukan suatu usaha nya. Fitur - fitur yang tersedia juga cukup lengkap, dimulai dari fitur tambah / keluar barang. Hingga laporan barang dan transaksi barang. Desain yang sederhana dan elegan juga menjadi prioritas dari aplikasi ini.</p>
 		</div>
 	</div>
 </section>
@@ -98,27 +91,6 @@
 					<p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
 					<small class="text-muted">Donec id elit non mi porta.</small>
 				</a>
-			</div>
-		</div>
-	</div>
-</div>
-
-<div class="jumbotron jumbotron-fluid bg-light">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-3">
-				<img src="" class="img-thumbnail">
-			</div>
-			<div class="col-md-9">
-				<h2>Mohammad Ilham Teguhriyadi</h2>
-				<p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-				</p>
-				<button class="btn btn-primary">Download</button>
 			</div>
 		</div>
 	</div>

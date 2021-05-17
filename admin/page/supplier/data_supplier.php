@@ -1,3 +1,72 @@
+<script type="text/javascript">
+    function editSupplier(kode_supplier) {
+        $.ajax({
+            url : "http://localhost/Proyek1/admin/page/supplier/edit-supplier.php",
+            type : "POST",
+            data : { kode_supplier : kode_supplier },
+            success : function (data) {
+                $("#modal-update").html(data);
+                return true;
+            }
+        })
+    }
+    
+    function berhasil() {
+        setTimeout(function() {
+            swal({
+                title : 'BERHASIL',
+                text : 'Data Berhasil di Tambahkan',
+                type : 'success',
+                showConfirmationButton : true
+            });
+        });
+        window.setTimeout(function() {
+            window.location.replace("?page=supplier");
+        }, 3000);
+    }
+
+    function gagal() {
+        setTimeout(function() {
+            swal({
+                title : 'GAGAL',
+                text : 'Data Gagal di Tambahkan',
+                type : 'error',
+                showConfirmationButton : true
+            });
+        });
+        window.setTimeout(function() {
+            window.location.replace("?page=supplier");
+        }, 3000);
+    }
+
+    function berhasil_hapus() {
+        setTimeout(function() {
+            swal({
+                title : 'BERHASIL',
+                text : 'Data Berhasil di Hapus',
+                type : 'success',
+                showConfirmationButton : true
+            });
+        });
+        window.setTimeout(function() {
+            window.location.replace("?page=supplier");
+        }, 3000);
+    }
+
+    function gagal_hapus() {
+        setTimeout(function() {
+            swal({
+                title : 'GAGAL',
+                text : 'Data Gagal di Hapus',
+                type : 'error',
+                showConfirmationButton : true
+            });
+        });
+        window.setTimeout(function() {
+            window.location.replace("?page=supplier");
+        }, 3000);
+    }
+</script>
 <?php
 
     $cari_kd = $con->query("SELECT MAX(kode_supplier) as kodeSup FROM supplier");
@@ -77,7 +146,7 @@
                                     <button id="btn-edit-supplier" onclick="editSupplier('<?php echo $data_supplier['kode_supplier'] ?>')" type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModalUpdate"><i class="fa fa-pencil"></i> Edit
                                     </button>
 
-                                    <form class="d-inline" method="POST" action="?page=hapus-supplier">
+                                    <form class="d-inline" method="POST">
                                         <input type="hidden" name="kode_supplier" value="<?php echo $data_supplier['kode_supplier']; ?>">
                                         <button onclick="return confirm('Yakin ? Anda Ingin Menghapus Data Ini ?')" type="submit" name="btn-hapus" class="btn btn-danger btn-sm">
                                             <i class="fa fa-trash-o"></i> Hapus
@@ -103,7 +172,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST" action="?page=aksi-simpan-supplier">
+            <form method="POST">
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="kode_supplier"> Kode Supplier </label>
@@ -156,16 +225,38 @@
 </div>
 <!-- END -->
 
-<script type="text/javascript">
-    function editSupplier(kode_supplier) {
-        $.ajax({
-            url : "http://localhost/Proyek1/admin/page/supplier/edit-supplier.php",
-            type : "POST",
-            data : { kode_supplier : kode_supplier },
-            success : function (data) {
-                $("#modal-update").html(data);
-                return true;
-            }
-        })
+<!-- Fungsi Tambah Data -->
+<?php
+    if (isset($_POST['btn-simpan'])) {
+        $kode_supplier = $_POST['kode_supplier'];
+        $nama_supplier = $_POST['nama_supplier'];
+        $no_telepon = $_POST['no_telepon'];
+        $keterangan = $_POST['keterangan'];
+        $status = 1;
+
+        $query = $con->query("INSERT INTO supplier VALUES('$kode_supplier','$nama_supplier', '$no_telepon', 'Data Supplier $keterangan', '$status')");
+
+        if ($query != 0) {
+            echo "<script>berhasil();</script>";
+        } else {
+            echo "<script>gagal();</script>";
+        }
     }
-</script>
+?>
+<!-- END -->
+
+<!-- Fungsi Hapus Data -->
+<?php
+    if (isset($_POST['btn-hapus'])) {
+        $kode_supplier = $_POST['kode_supplier'];
+
+        $query = $con->query("DELETE FROM supplier WHERE kode_supplier = '$kode_supplier' ");
+
+        if ($query != 0) {
+            echo "<script>berhasil_hapus();</script>";
+        } else {
+            echo "<script>gagal_hapus();</script>";
+        }
+    }
+?>
+<!-- END -->

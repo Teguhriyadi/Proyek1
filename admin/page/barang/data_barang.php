@@ -1,3 +1,97 @@
+<script type="text/javascript">
+    function editBarang(kode_barang) {
+        $.ajax({
+            url : "http://localhost/Proyek1/admin/page/barang/edit-barang.php",
+            type : "POST",
+            data : { kode_barang : kode_barang },
+            success : function (data) {
+                $("#modal-update").html(data);
+                return true;
+            }
+        })
+    }
+
+    function tambahTransaksiBarang(kode_barang) {
+        $.ajax({
+            url : "http://localhost/Proyek1/admin/page/barang/transaksi-masuk.php",
+            type : "POST",
+            data : { kode_barang : kode_barang },
+            success : function (data) {
+                $("#modal-transaksi-masuk").html(data);
+                return true;
+            }
+        })
+    }
+
+    function kurangiTransaksiBarang(kode_barang) {
+        $.ajax({
+            url : "http://localhost/Proyek1/admin/page/barang/transaksi-keluar.php",
+            type : "POST",
+            data : { kode_barang : kode_barang },
+            success : function (data) {
+                $("#modal-transaksi-keluar").html(data);
+                return true;
+            }
+        })
+    }
+
+    function berhasil() {
+        setTimeout(function() {
+            swal({
+                title : 'BERHASIL',
+                text : 'Data Berhasil di Tambahkan',
+                type : 'success',
+                showConfirmationButton : true
+            });
+        });
+        window.setTimeout(function() {
+            window.location.replace("?page=barang");
+        }, 3000);
+    }
+
+    function gagal() {
+        setTimeout(function() {
+            swal({
+                title : 'GAGAL',
+                text : 'Data Gagal di Tambahkan',
+                type : 'error',
+                showConfirmationButton : true
+            });
+        });
+        window.setTimeout(function() {
+            window.location.replace("?page=barang");
+        }, 3000);
+    }
+
+    function berhasil_hapus() {
+        setTimeout(function() {
+            swal({
+                title : 'BERHASIL',
+                text : 'Data Berhasil di Hapus',
+                type : 'success',
+                showConfirmationButton : true
+            });
+        });
+        window.setTimeout(function() {
+            window.location.replace("?page=barang");
+        }, 3000);
+    }
+
+    function gagal_hapus() {
+        setTimeout(function() {
+            swal({
+                title : 'GAGAL',
+                text : 'Data Gagal di Hapus',
+                type : 'error',
+                showConfirmationButton : true
+            });
+        });
+        window.setTimeout(function() {
+            window.location.replace("?page=barang");
+        }, 3000);
+    }
+</script>
+
 <?php
     $query = "SELECT max(kode_barang) as maxKode from barang";
     $hasil = mysqli_query($con, $query);
@@ -29,7 +123,7 @@
         <div class="card-header">
             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus"></i> Tambah Data
             </button>
-            <a href="" class="btn btn-danger btn-sm pull-right">
+            <a href="#" class="btn btn-danger btn-sm pull-right">
                 <i class="fa fa-envelope"></i> Cetak PDF
             </a>
         </div>
@@ -95,7 +189,7 @@
                                     </button>
                                     <!-- END -->
 
-                                    <form class="d-inline" method="POST" action="?page=hapus-barang">
+                                    <form class="d-inline" method="POST">
                                         <input type="hidden" name="kode_barang" value="<?php echo $data_barang['kode_barang']; ?>">
                                         <button onclick="return confirm('Yakin ? Anda Ingin Menghapus Data Ini ?')" name="btn-hapus" type="submit" class="btn btn-danger btn-sm">
                                             <i class="fa fa-trash-o"></i> Hapus
@@ -124,7 +218,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST" action="?page=aksi-simpan-barang">
+            <form method="POST">
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-6">
@@ -238,7 +332,7 @@
 </div>
 <!-- END -->
 
-<!-- Transaksi Masuk -->
+<!-- Transaksi Keluar -->
 <div class="modal fade" id="exampleModalTransaksiKeluar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -262,40 +356,40 @@
 </div>
 <!-- END -->
 
-<script type="text/javascript">
-    function editBarang(kode_barang) {
-        $.ajax({
-            url : "http://localhost/Proyek1/admin/page/barang/edit-barang.php",
-            type : "POST",
-            data : { kode_barang : kode_barang },
-            success : function (data) {
-                $("#modal-update").html(data);
-                return true;
-            }
-        })
-    }
+<!-- Fungsi Tambah Data -->
+<?php
+    if (isset($_POST['btn-simpan'])) {
+        $kode_barang = $_POST['kode_barang'];
+        $id_kategori = $_POST['id_kategori'];
+        $nama_barang = $_POST['nama_barang'];
+        $harga = $_POST['harga'];
+        $satuan = $_POST['satuan'];
+        $keterangan = $_POST['keterangan'];
 
-    function tambahTransaksiBarang(kode_barang) {
-        $.ajax({
-            url : "http://localhost/Proyek1/admin/page/barang/transaksi-masuk.php",
-            type : "POST",
-            data : { kode_barang : kode_barang },
-            success : function (data) {
-                $("#modal-transaksi-masuk").html(data);
-                return true;
-            }
-        })
-    }
+        $query = $con->query("INSERT INTO barang VALUES('$kode_barang', '$id_kategori' ,'$nama_barang','$harga','$satuan','$keterangan')");
 
-    function kurangiTransaksiBarang(kode_barang) {
-        $.ajax({
-            url : "http://localhost/Proyek1/admin/page/barang/transaksi-keluar.php",
-            type : "POST",
-            data : { kode_barang : kode_barang },
-            success : function (data) {
-                $("#modal-transaksi-keluar").html(data);
-                return true;
-            }
-        })
+        if ($query != 0) {
+            echo "<script>berhasil();</script>";
+        } else {
+            echo "<script>gagal();</script>";
+        }
     }
-</script>
+?>
+
+<!-- END -->
+
+<!-- Fungsi Hapus Data -->
+<?php
+    if (isset($_POST['btn-hapus'])) {
+        $kode_barang = $_POST['kode_barang'];
+
+        $query = $con->query("DELETE FROM barang WHERE kode_barang = '$kode_barang' ");
+
+        if ($query != 0) {
+            echo "<script>berhasil_hapus();</script>";
+        } else {
+            echo "<script>gagal_hapus();</script>";
+        }
+    }
+?>
+<!-- END -->

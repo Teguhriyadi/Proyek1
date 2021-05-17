@@ -1,15 +1,16 @@
 <?php 
-session_start();
-  // Memanggil Koneksi
-include '../config/koneksi.php'; 
+  define('access', true);
+  session_start();
+    // Memanggil Koneksi
+  include '../config/koneksi.php'; 
 
-  // cek apakah yang mengakses halaman ini sudah login
-if(!isset($_SESSION['login-admin'])){
-  echo "<script>alert('Harus Login Terlebih Dahulu');</script>";
-  echo "<script>location='auth/login.php';</script>";
-} else if ($_SESSION['level']!="admin") {
-  echo "<script>location='../index.php';</script>";
-}
+    // cek apakah yang mengakses halaman ini sudah login
+  if(!isset($_SESSION['login-admin'])){
+    echo "<script>alert('Harus Login Terlebih Dahulu');</script>";
+    echo "<script>location='auth/login.php';</script>";
+  } else if ($_SESSION['level']!="admin") {
+    echo "<script>location='../index.php';</script>";
+  }
 
 ?>
 <!DOCTYPE html>
@@ -31,6 +32,7 @@ if(!isset($_SESSION['login-admin'])){
   <link href="template/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
   <!-- Custom styles for this template-->
   <link href="template/css/sb-admin.css" rel="stylesheet">
+  <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css'>
   <script src="js/Chart.js"></script>
 </head>
 
@@ -87,11 +89,26 @@ if(!isset($_SESSION['login-admin'])){
             </li>
           </ul>
         </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Informasi">
-          <a class="nav-link" href="?page=informasi">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponentsTwo" data-parent="#exampleAccordion">
             <i class="fa fa-fw fa-envelope"></i>
-            <span class="nav-link-text">Informasi</span>
+            <span class="nav-link-text">Pesan</span>
           </a>
+          <ul class="sidenav-second-level collapse" id="collapseComponentsTwo">
+            <li>
+              <a class="nav-link" href="?page=informasi">
+                <span class="nav-link-text">Informasi</span>
+              </a>
+            </li>
+            <li>
+              <a class="nav-link" href="?page=saran">
+                <span class="nav-link-text">Saran</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Informasi">
+          
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Users">
           <a class="nav-link" href="?page=users">
@@ -114,7 +131,7 @@ if(!isset($_SESSION['login-admin'])){
             <span class="d-lg-none">Messages
               <span class="badge badge-pill badge-primary">
                 <?php
-                $sql = "SELECT * FROM informasi";
+                $sql = "SELECT * FROM informasi WHERE status = 0";
                 $query = mysqli_query($con,$sql);
                 $count = mysqli_num_rows($query);
                 echo $count;
@@ -231,6 +248,7 @@ if(!isset($_SESSION['login-admin'])){
   <!-- Custom scripts for this page-->
   <script src="template/js/sb-admin-datatables.min.js"></script>
   <script src="template/js/sb-admin-charts.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
 
 </body>
 

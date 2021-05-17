@@ -9,101 +9,99 @@
 
 <div class="container">
 	<div class="row">
-		<div class="col-md-8 mb-4">
+		<div class="col-md-12 mb-4">
 			<div class="card">
 				<div class="card-body">
-					<div class="alert alert-success" role="alert">
-						Hay Ilham
-					</div>
-
-					<form>
-						<div class="form-group">
-							<label for="exampleInputEmail1">Email address</label>
-							<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-							<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-						</div>
-						<div class="form-group">
-							<label for="exampleInputPassword1">Password</label>
-							<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-						</div>
-						<div class="form-group">
-							<label for="exampleInputPassword1">Alamat</label>
-							<textarea class="form-control" name="alamat" rows="5"></textarea>
-						</div>
-						<div class="form-check">
-							<input type="checkbox" class="form-check-input" id="exampleCheck1">
-							<label class="form-check-label" for="exampleCheck1">Check me out</label>
-						</div>
-						<button type="submit" class="btn btn-primary">Submit</button>
-					</form>
+					<h3>Info Terkait</h3>
+					<hr>
+					<table>
+						<tr>
+							<td>Nama</td>
+							<td>:</td>
+							<td>
+								IO - Keeper
+							</td>
+						</tr>
+						<tr>
+							<td>No. Handphone</td>
+							<td>:</td>
+							<td>0812-1478-0972</td>
+						</tr>
+						<tr>
+							<td>Alamat</td>
+							<td>:</td>
+							<td>Villa Intan Blok E No. 06 Klayan Cirebon</td>
+						</tr>
+					</table>
 				</div>
 			</div>
 		</div>	
-		<div class="col-md-4 mb-4">
-			<div class="card mb-3">
-				<div class="card-body bg-light">
-					<h5>Susah Belajar ?</h5>
-					<p>Mohammad Ilham</p>
-					<form>
+	</div>
+	<div class="row">
+		<div class="col-md-12 mb-4">
+			<div class="card">
+				<div class="card-header">
+					<h3>Saran & Masukan</h3>
+				</div>
+				<div class="card-body">
+					<form method="POST">
 						<div class="form-group">
-							<input type="text" class="form-control" name="">
+							<label for="nama"> Nama </label>
+							<input type="text" id="nama" class="form-control" name="nama" placeholder="Masukkan Nama">
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="email"> Email </label>
+									<input type="email" id="email" class="form-control" name="email" placeholder="Masukkan Email">
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="no_telepon"> No. Telepon </label>
+									<input type="text" id="no_telepon" class="form-control" name="no_telepon" placeholder="Masukkan No. Telepon">
+								</div>
+							</div>
 						</div>
 						<div class="form-group">
-							<input type="email" class="form-control" name="">
+							<label for="keterangan"> Keterangan </label>
+							<textarea id="keterangan" class="form-control" name="keterangan" placeholder="Masukkan Keterangan" rows="4"></textarea>
 						</div>
-						<button class="btn btn-primary">Oke!</button>
+						<hr>
+						<div class="form-group">
+							<button type="submit" name="btn-kirim" class="btn btn-primary btn-sm">
+								Kirim
+							</button>
+							<button type="reset" class="btn btn-danger btn-sm">
+								Batal
+							</button>
+						</div>
 					</form>
 				</div>
 			</div>
-			<h5>Tutorial</h5>
-
-			<div class="list-group">
-				<a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
-					<div class="d-flex w-100 justify-content-between">
-						<h5 class="mb-1">List group item heading</h5>
-						<small>3 days ago</small>
-					</div>
-					<p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-					<small>Donec id elit non mi porta.</small>
-				</a>
-				<a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-					<div class="d-flex w-100 justify-content-between">
-						<h5 class="mb-1">List group item heading</h5>
-						<small class="text-muted">3 days ago</small>
-					</div>
-					<p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-					<small class="text-muted">Donec id elit non mi porta.</small>
-				</a>
-				<a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-					<div class="d-flex w-100 justify-content-between">
-						<h5 class="mb-1">List group item heading</h5>
-						<small class="text-muted">3 days ago</small>
-					</div>
-					<p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-					<small class="text-muted">Donec id elit non mi porta.</small>
-				</a>
-			</div>
 		</div>
 	</div>
 </div>
 
-<div class="jumbotron jumbotron-fluid bg-light">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-3">
-				<img src="" class="img-thumbnail">
-			</div>
-			<div class="col-md-9">
-				<h2>Mohammad Ilham Teguhriyadi</h2>
-				<p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-				</p>
-				<button class="btn btn-primary">Download</button>
-			</div>
-		</div>
-	</div>
-</div>
+<!-- Fungsi Tambah Data -->
+
+<?php
+	if (isset($_POST['btn-kirim'])) {
+		$nama = $_POST['nama'];
+		$email = $_POST['email'];
+		$no_telepon = $_POST['no_telepon'];
+		date_default_timezone_set('Asia/Jakarta');
+		$created_at = date("d-m-y H:i:s");
+		$keterangan = $_POST['keterangan'];
+
+		$query = $con->query("INSERT INTO saran VALUES('','$nama','$email','$no_telepon','$created_at','$keterangan')");
+
+		if ($query != 0) {
+			echo "<script>alert('Data Berhasil di Tambahkan');</script>";
+			echo "<script>window.location.replace('?page=contact');</script>";
+		} else {
+			echo "<script>alert('Data Gagal di Tambahkan');</script>";
+			echo "<script>window.location.replace('?page=contact');</script>";
+		}
+	}
+?>

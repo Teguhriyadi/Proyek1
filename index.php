@@ -11,7 +11,7 @@
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <title>.: IO - Keeper | <?php require 'mod/title.php'; ?> :.</title>
   <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
@@ -27,13 +27,13 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="?page=home">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="?page=home"><i class="fa fa-home"></i> Home <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="?page=about">About</a>
+            <a class="nav-link" href="?page=about"><i class="fa fa-search"></i> About</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="?page=contact">Contact</a>
+            <a class="nav-link" href="?page=contact"><i class="fa fa-phone"></i> Contact</a>
           </li>
           <?php if (isset($_SESSION['login'])) : ?>
             <li class="nav-item">
@@ -46,7 +46,7 @@
 
         <?php if (!isset($_SESSION['login'])) : ?>
         <form class="form-inline my-2 my-lg-0">
-          <button type="button" class="btn btn-success my-2 my-sm-0" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus"></i> Masuk / Login
+          <button type="button" class="btn btn-success my-2 my-sm-0" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-sign-in"></i> Masuk / Login
         </button>
         </form>
         <?php else : ?>

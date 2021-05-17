@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 12, 2021 at 11:57 AM
+-- Generation Time: May 17, 2021 at 05:15 AM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
@@ -42,10 +42,9 @@ CREATE TABLE `barang` (
 --
 
 INSERT INTO `barang` (`kode_barang`, `id_kategori`, `nama_barang`, `harga`, `satuan`, `keterangan`) VALUES
-('BR-003', 11, 'Terigu 1/25', 20000, 'kg', 'Data Barang Terigu 1/2'),
+('BR-003', 26, 'Terigu 1/30', 50000, 'tiga_per_empat', 'Data Barang Terigu 1/30'),
 ('BR-004', 1, 'Beras', 10000, 'kg', 'Ini adalah data beras'),
-('BR-005', 1, 'Beras', 10000, 'kg', '1'),
-('BR-007', 1, 'Kecap Bango', 5000, 'pcs', 'Data Kecap Bango');
+('BR-005', 1, 'Beras', 10000, 'kg', '1');
 
 -- --------------------------------------------------------
 
@@ -78,21 +77,51 @@ INSERT INTO `informasi` (`id_informasi`, `nama_informasi`, `keterangan`, `create
 
 CREATE TABLE `kategori` (
   `id_kategori` int(11) NOT NULL,
-  `nama_kategori` varchar(100) DEFAULT NULL
+  `nama_kategori` varchar(100) DEFAULT NULL,
+  `status` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `kategori`
 --
 
-INSERT INTO `kategori` (`id_kategori`, `nama_kategori`) VALUES
-(3, 'Minuman'),
-(4, 'Makanan 123'),
-(5, 'Mohammad Ilham'),
-(6, 'Mohammad Ilham 123'),
-(11, 'Mohammad Ilham'),
-(12, '1'),
-(13, '232');
+INSERT INTO `kategori` (`id_kategori`, `nama_kategori`, `status`) VALUES
+(3, 'Minuman', 0),
+(4, 'Makanan 123', 0),
+(5, 'Mohammad Ilham', 0),
+(6, 'Mohammad Ilham 123', 0),
+(11, 'Mohammad Ilham', 0),
+(14, 'Obat', 0),
+(15, 'Mohammad ilham', 0),
+(16, 'Ilham Teguh', 0),
+(17, 'Makanan  Makanan', 0),
+(18, 'Teguhriyadi', 0),
+(21, 'Ramdan', 0),
+(22, 'Romeo', 0),
+(23, 'Rudolf', 0),
+(24, 'Bawah', 0),
+(25, 'Sahrul', 0),
+(27, 'Fazri', 0),
+(28, 'Ahmad In', 0),
+(29, 'Rini', 0),
+(30, 'RIyan', 0),
+(31, 'Kardun', 0),
+(32, 'Ahmad Out', 0),
+(33, 'Rukun', 0),
+(34, 'Riyadi', 0),
+(42, 'Unpas', 0),
+(43, 'Programming', 0),
+(44, 'Fatimah', 0),
+(45, 'Elang', 0),
+(46, 'Udin', 0),
+(47, 'Suripah', 0),
+(48, 'Farhan', 0),
+(49, 'Yanuar', 0),
+(50, 'Fatur', 0),
+(51, 'II', 0),
+(52, 'Web Programming', 0),
+(54, 'Pralienka', 0),
+(55, 'Pro', 0);
 
 -- --------------------------------------------------------
 
@@ -105,6 +134,28 @@ CREATE TABLE `pelanggan` (
   `nama_pelanggan` varchar(191) DEFAULT NULL,
   `no_telepon` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `saran`
+--
+
+CREATE TABLE `saran` (
+  `id_saran` int(11) NOT NULL,
+  `nama` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `no_telepon` varchar(30) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `keterangan` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `saran`
+--
+
+INSERT INTO `saran` (`id_saran`, `nama`, `email`, `no_telepon`, `created_at`, `keterangan`) VALUES
+(1, 'Mohammad Ilham', 'ilham@gmail.com', '12345', '2013-05-21 13:39:14', '');
 
 -- --------------------------------------------------------
 
@@ -126,7 +177,7 @@ CREATE TABLE `supplier` (
 
 INSERT INTO `supplier` (`kode_supplier`, `nama_supplier`, `no_telepon`, `keterangan`, `status`) VALUES
 ('12345', 'Ahmad Fauzi', '122345', 'Pocari Sweat', 1),
-('S002346', 'Mohammad Ilham Teguhriyadi', '12345', 'Data Supplier Mizone', 1);
+('S002346', 'Mohammad Ilham Teguhriyadi 500', '38493483', 'Pocari Sweat', 1);
 
 -- --------------------------------------------------------
 
@@ -153,9 +204,7 @@ INSERT INTO `transaksi_barang` (`id_transaksi`, `kode_barang`, `stok`, `tanggal`
 (4, 'BR-004', 1, '2021-05-12 14:26:02', 0, 'NULL'),
 (5, 'BR-004', 1, '2021-05-12 14:29:46', 0, 'NULL'),
 (6, 'BR-005', 5, '2021-05-12 14:31:45', 1, ''),
-(7, 'BR-003', 1, '2021-05-12 16:50:56', 0, 'NULL'),
-(8, 'BR-003', 1, '2021-05-12 16:51:18', 1, ''),
-(9, 'BR-004', 3, '2021-05-12 16:52:22', 1, 'NULL');
+(7, 'BR-003', 1, '2021-05-12 16:50:56', 0, 'NULL');
 
 -- --------------------------------------------------------
 
@@ -179,8 +228,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `created_at`, `updated_at`, `last_login`, `level`) VALUES
-(1, 'asep', 'asep@gmail.com', '$2y$10$DpnuIU40//TNnyK/6mgitO.G9zuHlF1Px51xqhbmOG4BDbrMa2Ab2', '2021-05-10 13:51:04', '2021-05-12 01:58:20', '2021-05-12 16:44:11', 'admin'),
-(2, 'budiman', 'budiman@gmail.com', '$2y$10$IxxQUMamBtqYcjwIC940R.2hJeUVKFUYv00ahDTZJnJJSIFqV/Mf2', '2021-05-06 15:39:13', '2021-05-12 01:57:15', '2021-05-06 17:39:13', 'admin'),
+(1, 'asep', 'asep@gmail.com', '$2y$10$DpnuIU40//TNnyK/6mgitO.G9zuHlF1Px51xqhbmOG4BDbrMa2Ab2', '2021-05-10 13:51:04', '2021-05-12 01:58:20', '2021-05-13 20:58:23', 'admin'),
 (11, 'kasir', 'kasir@gmail.com', '$2y$10$t.0lzV8R/i9KVjjyeYatS.pKCY5pjSe3mAW0Y.lNq3iKbCqR3BddS', '2021-05-12 02:47:00', '2021-05-12 02:47:00', '2021-05-12 09:47:52', 'kasir');
 
 --
@@ -210,6 +258,12 @@ ALTER TABLE `kategori`
 --
 ALTER TABLE `pelanggan`
   ADD PRIMARY KEY (`kode_pelanggan`);
+
+--
+-- Indexes for table `saran`
+--
+ALTER TABLE `saran`
+  ADD PRIMARY KEY (`id_saran`);
 
 --
 -- Indexes for table `supplier`
@@ -243,13 +297,19 @@ ALTER TABLE `informasi`
 -- AUTO_INCREMENT for table `kategori`
 --
 ALTER TABLE `kategori`
-  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+
+--
+-- AUTO_INCREMENT for table `saran`
+--
+ALTER TABLE `saran`
+  MODIFY `id_saran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `transaksi_barang`
 --
 ALTER TABLE `transaksi_barang`
-  MODIFY `id_transaksi` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_transaksi` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `users`

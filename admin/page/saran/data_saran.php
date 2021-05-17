@@ -80,7 +80,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
-            <h3><i class="fa fa-bars"></i> Data Kategori</h3>
+            <h3><i class="fa fa-pencil"></i> Data Saran</h3>
             <br>
         </div>
     </div>
@@ -88,13 +88,12 @@
         <li class="breadcrumb-item">
             <a href="?page=dashboard">Dashboard</a>
         </li>
-        <li class="breadcrumb-item active">Data Kategori</li>
+        <li class="breadcrumb-item active">Data Saran</li>
     </ol>
 
     <div class="card mb-3">
         <div class="card-header">
-            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus"></i> Tambah Data
-            </button>
+        	Saran & Masukan
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -102,19 +101,19 @@
                     <thead>
                         <tr>
                             <th class="text-center">No.</th>
-                            <th>Nama Kategori</th>
-                            <th class="text-center">Aksi</th>
+                            <th>Nama</th>
+                            <th>Email</th>
+                            <th>No. Telepon</th>
+                            <th class="text-center">Tanggal</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php
-                        $no = 0;
-                        $query = $con->query("SELECT * FROM kategori ORDER BY nama_kategori ASC");
-                        $bgcolor = "";
-
-                        ?>
-                        <?php foreach ($query as $data_kategori) : ?>
-                            <?php 
+                    	<?php
+                    		$no = 0;
+                    		$query = $con->query("SELECT * FROM saran");
+                    	?>
+                    	<?php foreach ($query as $data_saran) : ?>
+                    		<?php 
                             if ($no % 2 == 0) {
                                 $bgcolor = "#F0F0F0";
                             } else {
@@ -122,21 +121,13 @@
                             }
                             ?>
                             <tr bgcolor="<?php echo $bgcolor; ?>">
-                                <td class="text-center"><?php echo ++$no; ?>.</td>
-                                <td><?php echo $data_kategori['nama_kategori']; ?></td>
-                                <td class="text-center">
-                                    <button id="btn-edit-kategori" onclick="editKategori(<?php echo $data_kategori['id_kategori'] ?>)" type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModalUpdate"><i class="fa fa-pencil"></i> Edit
-                                    </button>
-
-                                    <form class="d-inline" method="POST" >
-                                        <input type="hidden" name="id_kategori" value="<?php echo $data_kategori['id_kategori'] ?>">
-                                        <button onclick="return confirm('Yakin ? Anda Ingin Menghapus Data Ini ?')" name="btn-hapus" type="submit" class="btn btn-danger btn-sm">
-                                            <i class="fa fa-trash-o"></i> Hapus
-                                        </button>
-                                    </form>
-                                </td>
+                            	<td class="text-center"><?php echo ++$no; ?>.</td>
+                            	<td><?php echo $data_saran['nama']; ?></td>
+                            	<td><?php echo $data_saran['email']; ?></td>
+                            	<td><?php echo $data_saran['no_telepon']; ?></td>
+                            	<td class="text-center"><?php echo $data_saran['created_at']; ?></td>
                             </tr>
-                        <?php endforeach ?>
+                    	<?php endforeach ?>
                     </tbody>
                 </table>
             </div>
