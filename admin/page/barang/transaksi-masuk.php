@@ -23,9 +23,19 @@ if (isset($_POST['kode_barang'])) {
     <label for="nama_barang"> Nama Barang </label>
     <input type="text" id="nama_barang" class="form-control" name="nama_barang" value="<?php echo $edit['nama_barang']; ?>" readonly>
 </div>
-<div class="form-group">
-    <label for="jumlah"> QTY </label>
-    <input type="number" id="jumlah" name="stok" class="form-control" placeholder="0" autocomplete="off">
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="satuan_stok"> Satuan Stok </label>
+            <input type="text" id="satuan_stok" class="form-control" name="satuan_stok" placeholder="Masukkan Kode Satuan Stok">
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="jumlah"> QTY </label>
+            <input type="number" id="jumlah" name="stok" class="form-control" placeholder="0" autocomplete="off">
+        </div>
+    </div>
 </div>
 <div class="form-group">
     <label for="kode_supplier"> Nama Supplier </label>
