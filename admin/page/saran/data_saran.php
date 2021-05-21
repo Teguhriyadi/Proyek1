@@ -1,7 +1,7 @@
 <?php
 
     if (!defined('access')) {
-        echo "<script>alert('Sembarangan Aja wkwkwk');</script>";
+        echo "<script>alert('Maaf, Anda Tidak Berhak Masuk Ke Halaman Ini');</script>";
         echo "<script>window.location.replace('../../?page=dashboard');</script>";
         exit;
     }

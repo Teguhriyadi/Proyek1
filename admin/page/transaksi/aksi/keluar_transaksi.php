@@ -12,7 +12,7 @@
     $tanggal = date("Y-m-d H:i:s");
     $status = 0;
 
-    $query = $con->query("INSERT INTO transaksi_barang VALUES ('','$kode_barang','$stok','$tanggal','$status', 'NULL')");
+    $query = $con->query("INSERT INTO transaksi_barang VALUES ('','$kode_barang', NULL ,'$stok','$tanggal','$status', 'NULL')");
 
     if ($query != 0) {
         echo "<script>alert('Data Berhasil di Tambahkan');</script>";

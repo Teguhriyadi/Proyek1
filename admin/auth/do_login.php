@@ -14,6 +14,11 @@
 		$username = $_POST['username'];
 		$password = $_POST['password'];
 
+		if ($username == "" && $password == "") {
+			echo "<script>alert('Data Tidak Boleh Kosong');</script>";
+			echo "<script>location='login.php';</script>";
+		}
+
 		date_default_timezone_set("Asia/Jakarta");
 
 		$last_login = date("Y-m-d H:i:s");
@@ -36,6 +41,9 @@
 				echo "<script>alert('Maaf, Anda Salah Menginputkan Data');</script>";
 				echo "<script>location='login.php';</script>";
 			}
+		} else {
+			echo "<script>alert('Maaf, Data Gagal di Inputkan');</script>";
+			echo "<script>location='login.php';</script>";
 		}
 
 	} else {
