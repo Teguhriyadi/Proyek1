@@ -18,7 +18,7 @@
         $kodeSup = $_POST['kode_supplier'];
     }
 
-    $query = $con->query("INSERT INTO transaksi_barang VALUES ('','$kode_barang',NULL,'$stok','$tanggal','$status', '$kodeSup')");
+    $query = $con->query("INSERT INTO transaksi_barang VALUES ('','$kode_barang', NULL, '$stok','$tanggal','$status', '$kodeSup')");
 
     if ($query != 0) {
         echo "<script>alert('Data Berhasil di Tambahkan');</script>";
