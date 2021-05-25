@@ -5,11 +5,11 @@
 				Selamat Datang  
 
 				<b>
-				<?php if (isset($_SESSION['login'])) : ?>
-					<?php echo $_SESSION['user']; ?>
-				<?php else : ?>
-					
-				<?php endif ?>
+					<?php if (isset($_SESSION['login'])) : ?>
+						<?php echo $_SESSION['user']; ?>
+					<?php else : ?>
+
+					<?php endif ?>
 				</b>
 			</h1>
 			<p class="lead">di <b>Aplikasi IO - Keeper Berbasis Web</b>. Silahkan pilih menu untuk memulai program</p>
@@ -19,42 +19,25 @@
 
 <div class="container">
 	<div class="row">
-		<div class="col-md-3 mb-2">
-			<div class="card">
-				<img class="card-img-top" src="..." alt="Card image cap">
-				<div class="card-body">
-					<h6 class="card-title text-info">Mohammad Ilham</h6>
-					<h5 class="card-text"><a href="#" class="text-primary">#1 Tutorial</a></h5>
+		<?php
+		$query = $con->query("SELECT * FROM barang");
+		?>
+		<?php foreach ($query as $data) : ?>
+
+			<div class="col-md-3 mb-2">
+				<div class="card">
+					<?php if ($data['foto'] == "") : ?>
+						<img class="card-img-top" src="admin/img/cart.jpg" alt="Card image cap">
+					<?php else : ?>
+						<img class="card-img-top" src="admin/page/img/<?php echo $data['foto']; ?>" alt="Card image cap">
+					<?php endif ?>
+					<div class="card-body">
+						<h6 class="card-title text-info"><?php echo $data['nama_barang']; ?></h6>
+						<h5 class="card-text"><a href="#" class="text-primary">Rp. <?php echo number_format($data['harga']) ?></a></h5>
+					</div>
 				</div>
 			</div>
-		</div>
-		<div class="col-md-3 mb-2">
-			<div class="card">
-				<img class="card-img-top" src="..." alt="Card image cap">
-				<div class="card-body">
-					<h6 class="card-title text-info">Mohammad Ilham</h6>
-					<h5 class="card-text"><a href="#" class="text-primary">#1 Tutorial</a></h5>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-3 mb-2">
-			<div class="card">
-				<img class="card-img-top" src="..." alt="Card image cap">
-				<div class="card-body">
-					<h6 class="card-title text-info">Mohammad Ilham</h6>
-					<h5 class="card-text"><a href="#" class="text-primary">#1 Tutorial</a></h5>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-3 mb-2">
-			<div class="card">
-				<img class="card-img-top" src="..." alt="Card image cap">
-				<div class="card-body">
-					<h6 class="card-title text-info">Mohammad Ilham</h6>
-					<h5 class="card-text"><a href="#" class="text-primary">#1 Tutorial</a></h5>
-				</div>
-			</div>
-		</div>
+		<?php endforeach ?>
 	</div>
 </div>
 

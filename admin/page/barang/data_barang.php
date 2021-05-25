@@ -123,7 +123,7 @@
         <div class="card-header">
             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus"></i> Tambah Data
             </button>
-            <a href="#" class="btn btn-danger btn-sm pull-right">
+            <a href="../admin/cetak.php" class="btn btn-danger btn-sm pull-right">
                 <i class="fa fa-envelope"></i> Cetak PDF
             </a>
         </div>
@@ -218,7 +218,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST">
+            <form method="POST" enctype="multipart/form-data">
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-6">
@@ -270,6 +270,10 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label for="foto"> Foto </label>
+                        <input type="file" class="form-control" id="foto" name="foto">
+                    </div>
+                    <div class="form-group">
                         <label for="keterangan"> Keterangan </label>
                         <textarea class="form-control" id="keterangan" name="keterangan" rows="4" placeholder="Masukkan Keterangan"></textarea>
                     </div>
@@ -294,7 +298,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST" action="?page=aksi-edit-barang">
+            <form method="POST" action="?page=aksi-edit-barang" enctype="multipart/form-data">
                 <div class="modal-body" id="modal-update">
                     
                 </div>
@@ -366,7 +370,41 @@
         $satuan = $_POST['satuan'];
         $keterangan = $_POST['keterangan'];
 
-        $query = $con->query("INSERT INTO barang VALUES('$kode_barang', '$id_kategori' ,'$nama_barang','$harga','$satuan','$keterangan')");
+        $namafile = $_FILES['foto']['name'];
+        $ukuranfile = $_FILES['foto']['size'];
+        $error = $_FILES['foto']['error'];
+        $tmpname = $_FILES['foto']['tmp_name'];
+
+        if ($error == 4) { // 4 adalah jumlah dari error
+            echo "<script>alert('Pilih Gambar Dahulu');</script>";
+            echo "<script>window.location.replace('?page=barang');</script>";
+            exit;
+        }
+
+        $ekstensiGambarValid = ['jpg','jpeg','png'];
+        $ekstensiGambar = explode('.', $namafile);
+        $ekstensiGambar = strtolower(end($ekstensiGambar));
+
+        if (!in_array($ekstensiGambar, $ekstensiGambarValid)) {
+            echo "<script>alert('Bukan Gambar');</script>";
+            echo "<script>window.location.replace('?page=barang');</script>";
+            exit;
+        }
+        if ($ukuranfile > 1000000) {
+            echo "<script>alert('Ukuran Terlalu besar');</script>";
+            echo "<script>window.location.replace('?page=barang');</script>";
+            exit;
+        }
+
+        // gambar siap di upload
+        // generate nama gambar baru
+        $namafilebaru = uniqid();
+        $namafilebaru .= '.';
+        $namafilebaru .= $ekstensiGambar;
+
+        move_uploaded_file($tmpname, 'page/img/' . $namafilebaru);
+
+        $query = $con->query("INSERT INTO barang VALUES('$kode_barang', '$id_kategori' ,'$nama_barang','$harga','$satuan','$keterangan', '$namafilebaru')");
 
         if ($query != 0) {
             echo "<script>berhasil();</script>";
@@ -382,6 +420,14 @@
 <?php
     if (isset($_POST['btn-hapus'])) {
         $kode_barang = $_POST['kode_barang'];
+
+        $sql = mysqli_query($con, "SELECT * FROM barang WHERE kode_barang = '$kode_barang'");
+        $data = $sql->fetch_array();
+        $foto = $data['foto'];
+        
+        if (file_exists("page/img/$foto")) {
+            unlink("page/img/$foto");
+        }
 
         $query = $con->query("DELETE FROM barang WHERE kode_barang = '$kode_barang' ");
 

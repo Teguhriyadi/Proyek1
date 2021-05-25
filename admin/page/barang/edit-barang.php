@@ -14,7 +14,7 @@
     }
     
 ?>
-
+<input type="hidden" name="foto_lama" value="<?php echo $edit['foto']; ?>">
 <div class="row">
     <div class="col-md-6">
         <div class="form-group">
@@ -101,6 +101,20 @@
             </select>
         </div>
     </div>
+</div>
+
+<?php if ($edit['foto'] == "") : ?>
+
+<?php else : ?>
+<div class="form-group">
+    <label for="gambar_album"> Gambar Gallery </label> <br>
+    <img src="page/img/<?php echo $edit['foto']; ?>" width="300">
+</div>
+<?php endif ?>
+
+<div class="form-group">
+    <label for="ganti_gambar"> Ganti Gambar</label>
+    <input type="file" class="form-control" id="ganti_gambar" name="foto">
 </div>
 <div class="form-group">
     <label for="keterangan"> Keterangan </label>
