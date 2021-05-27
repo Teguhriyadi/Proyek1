@@ -41,11 +41,11 @@
 			break;
 
 		case 'login':
-			echo"";
+			include "page/login.php";
 			break;
 
 		case 'logout':
-			echo"";
+			
 			break;
 
 		case 'nota':
