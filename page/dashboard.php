@@ -3,14 +3,6 @@
 		<div class="container">
 			<h1 class="display-4">
 				Selamat Datang  
-
-				<b>
-					<?php if (isset($_SESSION['login'])) : ?>
-						<?php echo $_SESSION['user']; ?>
-					<?php else : ?>
-
-					<?php endif ?>
-				</b>
 			</h1>
 			<p class="lead">di <b>Aplikasi IO - Keeper Berbasis Web</b>. Silahkan pilih menu untuk memulai program</p>
 		</div>
@@ -34,6 +26,11 @@
 					<div class="card-body">
 						<h6 class="card-title text-info"><?php echo $data['nama_barang']; ?></h6>
 						<h5 class="card-text"><a href="#" class="text-primary">Rp. <?php echo number_format($data['harga']) ?></a></h5>
+					</div>
+					<div class="card-footer">
+						<a href="?page=detail&kode_barang=<?php echo $data['kode_barang']; ?>">
+							<i class="fa fa-search"></i> Detail
+						</a>
 					</div>
 				</div>
 			</div>

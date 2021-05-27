@@ -2,34 +2,18 @@
 	if (isset($_GET['page'])) {
 		$page = $_GET['page'];
 	} else {
-		$page = "home";
+		$page = "dashboard";
 	}
 ?>
 
 <?php
 	switch ($page) {
-		case 'home':
-			include 'page/home.php';
+		case 'dashboard':
+			include 'page/dashboard.php';
 			break;
 
-		case 'about':
-			include 'page/about.php';
-			break;
-
-		case 'contact':
-			include 'page/kontak.php';
-			break;
-		
-		case 'aksi-auth-login':
-			include 'do_auth_login.php';
-			break;
-
-		case 'informasi':
-			include 'page/informasi.php';
-			break;
-
-		case 'aksi-simpan-informasi':
-			include 'page/aksi/simpan-informasi.php';
+		case 'detail':
+			include 'page/detail.php';
 			break;
 
 		default:

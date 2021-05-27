@@ -27,39 +27,28 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="?page=home"><i class="fa fa-home"></i> Home <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="?page=dashboard"><i class="fa fa-home"></i> Home <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="?page=about"><i class="fa fa-search"></i> About</a>
+            <a class="nav-link" href="?page=login"><i class="fa fa-search"></i> Login</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="?page=contact"><i class="fa fa-phone"></i> Contact</a>
+            <a class="nav-link" href="?page=daftar"><i class="fa fa-pencil"></i> Daftar</a>
           </li>
-          <?php if (isset($_SESSION['login'])) : ?>
-            <li class="nav-item">
-              <a class="nav-link" href="?page=informasi">Informasi</a>
-            </li>
-          <?php else : ?>
-            
-          <?php endif ?>
+          <li class="nav-item">
+            <a class="nav-link" href="?page=checkout"><i class="fa fa-shopping-cart"></i> Checkout</a>
+          </li>
         </ul>
 
-        <?php if (!isset($_SESSION['login'])) : ?>
         <form class="form-inline my-2 my-lg-0">
           <button type="button" class="btn btn-success my-2 my-sm-0" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-sign-in"></i> Masuk / Login
         </button>
         </form>
-        <?php else : ?>
-        <form class="form-inline my-2 my-lg-0">
-          <a class="btn btn-success my-2 my-sm-0" href="logout.php"><i class="fa fa-plus"></i> Logout </a>
-        </form>
-        <?php endif ?>
       </div>
     </div>
   </nav>
 
   <?php require 'mod/halaman.php'; ?>
-
 
   <footer class="warna-bg">
     <div class="text-white text-center pt-3 pb-3">
