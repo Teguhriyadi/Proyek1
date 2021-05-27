@@ -27,12 +27,17 @@
 				$sql_masuk = $con->query("select sum(stok) as 'stok' from transaksi_barang where kode_barang = '$kdBarang' and status = 1");
 				$data_masuk = $sql_masuk->fetch_array();
 				$jum_masuk = $data_masuk['stok'];
+
 				$sql_keluar = $con->query("select sum(stok) as'stok' from transaksi_barang where kode_barang ='$kdBarang' and status = 0 ");
 				$data_keluar = $sql_keluar->fetch_array();
 				$jum_keluar = $data_keluar['stok'];
-				$jumlah_barang = $jum_masuk - $jum_keluar;
-                                // $bgcolor = "";
 
+				$sql_beli_masuk = $con->query("SELECT sum(jumlah) as 'jumlah_masuk' FROM pembelian_barang WHERE kode_barang = '$kdBarang'");
+
+				$data_beli_masuk = $sql_beli_masuk->fetch_array();
+				$jum_beli_masuk = $data_beli_masuk['jumlah_masuk'];
+				$jum = $jum_masuk - $jum_keluar - $jum_beli_masuk;
+				
 				?>
 				<div class="col-md-3 mb-2">
 					<div class="card">
@@ -46,13 +51,13 @@
 							<h5 class="card-text"><a href="#" class="text-primary">Rp. <?php echo number_format($data['harga']) ?></a></h5>
 						</div>
 						<div class="card-footer">
-						<a href="?page=detail&kode_barang=<?php echo $data['kode_barang'] ?>">
+						<a href="?page=detail&kode_barang=<?php echo $data['kode_barang']; ?>">
 							<i class="fa fa-search"></i> Detail
 						</a> |
-						<a href="?page=beli">
+						<a href="?page=beli&kode_barang=<?php echo $data['kode_barang']; ?>">
 							<i class="fa fa-shopping-cart"></i> Beli
 						</a> |
-						Stok : <?php echo $jumlah_barang ?>
+						Stok : <?php echo $jum ?>
 						</div>
 					</div>
 				</div>

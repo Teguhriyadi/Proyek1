@@ -1,5 +1,3 @@
-
-
 <?php
 $ambil = $con->query("SELECT * FROM pembelian join pelanggan on pembelian.id_pelanggan = pelanggan.id_pelanggan where pembelian.id_pembelian='$_GET[id_nota]'");
 
@@ -136,7 +134,8 @@ if ($idpelangganyangbeli!==$idpelangganyanglogin) {
 				<th style="text-align: center;">No.</th>
 				<th>Nama Barang</th>
 				<th style="text-align: center; width: 100px;">Harga</th>
-				<th style="text-align: center; width: 120px;">Muatan Produk</th>
+				<th style="text-align: center; width: 120px;">Jumlah Beli</th>
+				<th style="text-align: center; width: 120px"> Total Harga </th>
 			</tr>
 		</thead>
 		<tbody>
@@ -150,6 +149,10 @@ if ($idpelangganyangbeli!==$idpelangganyanglogin) {
 					<td><?php echo $pecah['nama_barang']; ?></td>
 					<td style="text-align: center;">Rp. <?php echo number_format($pecah['harga']); ?></td>
 					<td style="text-align: center;"><?php echo $pecah['jumlah']; ?></td>
+					<?php
+						$jum_beli = $pecah['harga'] * $pecah['jumlah'];
+					?>
+					<td style="text-align: center;">Rp. <?php echo number_format($jum_beli); ?></td>
 				</tr>
 				<?php
 			}

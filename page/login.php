@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 <form method="POST">
 	<div class="container">
 		<div class="form-group">
@@ -10,40 +10,10 @@
 			<input type="text" class="form-control" name="password_pelanggan" placeholder="Masukkan password">
 		</div>
 		<div class="form-group">
-			<button class="btn btn-primary" name="btn-login">
-=======
-<form action="">
-	<div class="container">
-		<div class="form-group">
-			<label for="username"> Username </label>
-			<input type="text" class="form-control" name="username" placeholder="Masukkan username">
-		</div>
-		<div class="form-group">
-			<label for="username"> Password </label>
-			<input type="text" class="form-control" name="password" placeholder="Masukkan password">
-		</div>
-		<div class="form-group">
-			<label for="username"> Email Pelanggan </label>
-			<input type="text" class="form-control" name="email_pelanggan" placeholder="Masukkan email">
-		</div>
-		<div class="form-group">
-			<label for="username"> Nomor Telepon </label>
-			<input type="text" class="form-control" name="nomor_telepon" placeholder="Masukkan No telp">
-		</div>
-		<div class="form-group">
-			<label for="username"> Alamat Pelanggan </label>
-			<input type="text" class="form-control" name="alamat_pelanggan" placeholder="Masukkan Alamat">
-		</div>
-		<div class="form-group">
-			<button class="btn btn-primary">
->>>>>>> f42884709b7719b310bfd538e8fcaa9a6b815a0d
-				Daftar
-			</button>
+			<button class="btn btn-primary" name="btn-login"> Login </button>
 		</div>
 	</div>
 </form>
-
-<<<<<<< HEAD
 <?php 
 
 if (isset($_POST['btn-login'])) {
@@ -60,7 +30,7 @@ if (isset($_POST['btn-login'])) {
 	$result = $con->query("SELECT * FROM pelanggan WHERE email_pelanggan = '$email_pelanggan' ");
 
 	if (mysqli_num_rows($result) === 1) {
-		
+
 		$row = mysqli_fetch_assoc($result);
 
 		if (password_verify($password_pelanggan, $row['password_pelanggan'])) {
@@ -85,6 +55,4 @@ if (isset($_POST['btn-login'])) {
 }
 
 ?>
-=======
 <br><br>
->>>>>>> f42884709b7719b310bfd538e8fcaa9a6b815a0d

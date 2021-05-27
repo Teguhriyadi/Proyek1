@@ -33,9 +33,6 @@
             <li class="nav-item">
               <a class="nav-link" href="?page=riwayat"><i class="fa fa-search"></i> Riwayat Belanja </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="?page=logout"><i class="fa fa-pencil"></i> Logout </a>
-            </li>
           <?php else : ?>
             <li class="nav-item">
               <a class="nav-link" href="?page=login"><i class="fa fa-search"></i> Login</a>
@@ -45,14 +42,22 @@
             </li>
           <?php endif ?>
           <li class="nav-item">
+            <a class="nav-link" href="?page=keranjang"><i class="fa fa-shopping-cart"></i> Keranjang </a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="?page=checkout"><i class="fa fa-shopping-cart"></i> Checkout</a>
           </li>
         </ul>
-
-        <form class="form-inline my-2 my-lg-0">
-          <button type="button" class="btn btn-success my-2 my-sm-0" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-sign-in"></i> Masuk / Login
-        </button>
+        <?php if (@$_SESSION['pelanggan'] == "") : ?>
+          <a href="?page=login" class="btn btn-success">
+            <i class="fa fa-sign-in"></i> Masuk / Login
+          </a>
         </form>
+        <?php else : ?>
+          <a href="?page=logout" class="btn btn-danger">
+            <i class="fa fa-sign-out"></i> Logout
+          </a>
+        <?php endif ?>
       </div>
     </div>
   </nav>

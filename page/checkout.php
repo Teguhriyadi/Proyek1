@@ -1,7 +1,10 @@
 <?php
 if (!isset($_SESSION["pelanggan"])) {
 	echo "<script>alert('Maaf, Anda Harus Login Dahulu');</script>";
-	echo "<script>location='?page=login';</script>";
+	echo "<script>window.location.replace('?page=login');</script>";
+} else if (!isset($_SESSION['keranjang'])) {
+	echo "<script>alert('Tidak Ada Checkout');</script>";
+	echo "<script>window.location.replace('?page=dashboard');</script>";
 }
 ?>
 <br>
@@ -100,7 +103,8 @@ if (!isset($_SESSION["pelanggan"])) {
 		if (isset($_POST['print'])) {
 			$id_pelanggan = $_SESSION["pelanggan"]["id_pelanggan"];
 			$id_ongkir = $_POST["id_ongkir"];
-			$tanggal_pembelian = date("Y-m-d");
+			date_default_timezone_set("Asia/Jakarta");
+			$tanggal_pembelian = date("Y-m-d H:i:s");
 			$alamat_pengiriman = $_POST['alamat_pengiriman'];
 
 			$ambil = $con->query("SELECT * FROM pengiriman where id_ongkir = '$id_ongkir'");
@@ -120,7 +124,7 @@ if (!isset($_SESSION["pelanggan"])) {
 				$perproduk = $ambil->fetch_assoc();
 				$nama = $perproduk['nama_barang'];
 				$harga = $perproduk['harga'];
-				$con->query("INSERT INTO pembelian_barang (id_pembelian, kode_barang, jumlah , nama_barang, harga) VALUES ('$id_pembelian_baru','$kode_barang','$nama','$harga','$jumlah')");
+				$con->query("INSERT INTO pembelian_barang (id_pembelian, kode_barang, jumlah , nama_barang, harga) VALUES ('$id_pembelian_baru','$kode_barang','$jumlah','$nama','$harga')");
 			}
 
 			unset($_SESSION["keranjang"]);

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 27 Bulan Mei 2021 pada 15.06
+-- Waktu pembuatan: 27 Bulan Mei 2021 pada 16.50
 -- Versi server: 10.1.38-MariaDB
 -- Versi PHP: 7.3.2
 
@@ -131,6 +131,13 @@ CREATE TABLE `pembayaran` (
   `bukti_pembayaran` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data untuk tabel `pembayaran`
+--
+
+INSERT INTO `pembayaran` (`id_pembayaran`, `id_pembelian`, `nama_pelanggan`, `bank`, `jumlah`, `tanggal`, `bukti_pembayaran`) VALUES
+(1, 1, 'Mohammad Ilham Teguhriyadi', 'PT. Jaya Abadi', 6000, '2021-05-27 00:00:00', '20210527164656gambar-2.jpeg');
+
 -- --------------------------------------------------------
 
 --
@@ -146,7 +153,7 @@ CREATE TABLE `pembelian` (
   `nama_kota` varchar(100) NOT NULL,
   `tarif` double DEFAULT NULL,
   `alamat_pengiriman` text,
-  `status_pembelian` varchar(50) DEFAULT NULL,
+  `status_pembelian` varchar(50) DEFAULT 'pending',
   `resi_pengiriman` int(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -155,8 +162,7 @@ CREATE TABLE `pembelian` (
 --
 
 INSERT INTO `pembelian` (`id_pembelian`, `id_pelanggan`, `id_ongkir`, `tanggal_pembelian`, `total_pembelian`, `nama_kota`, `tarif`, `alamat_pengiriman`, `status_pembelian`, `resi_pengiriman`) VALUES
-(1, 8, 2, '2021-05-27 00:00:00', 88000, 'Jakarta', 80000, 'Bandung Raya', NULL, NULL),
-(2, 8, 2, '2021-05-27 00:00:00', 83000, 'Jakarta', 80000, 't', NULL, NULL);
+(1, 8, 3, '2021-05-27 21:46:35', 6000, 'Semarang', 5000, 'Bandung Raya', 'sudah kirim pembayaran', NULL);
 
 -- --------------------------------------------------------
 
@@ -178,9 +184,7 @@ CREATE TABLE `pembelian_barang` (
 --
 
 INSERT INTO `pembelian_barang` (`id_pembelian_barang`, `id_pembelian`, `kode_barang`, `jumlah`, `nama_barang`, `harga`) VALUES
-(1, 1, 'BR-004', 0, '5000', 1),
-(2, 1, 'BR-001', 0, '3000', 1),
-(3, 2, 'BR-001', 0, '3000', 1);
+(1, 1, 'BR-002', 1, 'Bon Cabe', 1000);
 
 -- --------------------------------------------------------
 
@@ -393,19 +397,19 @@ ALTER TABLE `pelanggan`
 -- AUTO_INCREMENT untuk tabel `pembayaran`
 --
 ALTER TABLE `pembayaran`
-  MODIFY `id_pembayaran` int(100) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pembayaran` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `pembelian`
 --
 ALTER TABLE `pembelian`
-  MODIFY `id_pembelian` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_pembelian` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `pembelian_barang`
 --
 ALTER TABLE `pembelian_barang`
-  MODIFY `id_pembelian_barang` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_pembelian_barang` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `pengiriman`
