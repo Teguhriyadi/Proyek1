@@ -70,6 +70,12 @@
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Supplier">
+          <a class="nav-link" href="?page=pengiriman">
+            <i class="fa fa-fw fa-pencil"></i>
+            <span class="nav-link-text">Pengiriman</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Supplier">
           <a class="nav-link" href="?page=transaksi">
             <i class="fa fa-fw fa-pencil"></i>
             <span class="nav-link-text">Transaksi</span>

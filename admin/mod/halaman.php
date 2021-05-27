@@ -103,6 +103,19 @@
             break;
         // END
 
+        // Pengiriman
+        case 'pengiriman' :
+            include 'page/pengiriman/data_pengiriman.php';
+            break;
+
+        case 'edit-pengiriman' :
+            include 'page/pengiriman/edit_pengiriman.php';
+            break;
+        
+        case 'aksi-edit-pengiriman' :
+            include 'page/pengiriman/aksi/edit_pengiriman.php';
+            break;
+
         // Informasi
         case 'informasi' :
             include 'page/informasi/data_informasi.php';
