@@ -42,13 +42,6 @@
 
 		case 'login':
 			include "page/login.php";
-<<<<<<< HEAD
-=======
-			break;
-
-		case 'logout':
-			
->>>>>>> f42884709b7719b310bfd538e8fcaa9a6b815a0d
 			break;
 
 		case 'nota':
