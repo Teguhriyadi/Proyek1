@@ -1,15 +1,13 @@
 <?php
-	session_start();
-	include 'koneksi.php';
 
-	$id_pembelian = $_GET['id'];
+	$id_pembelian = $_GET['id_pembelian'];
 
 	$ambil = $con->query("SELECT * FROM pembayaran LEFT JOIN pembelian ON pembayaran.id_pembelian=pembelian.id_pembelian WHERE pembelian.id_pembelian = '$id_pembelian'");
 	$detbay = $ambil->fetch_assoc();
 
 	if (empty($detbay)) {
 		echo "<script>alert('Belum Ada Data Pembayaran');</script>";
-		echo "<script>location='riwayat.php';</script>";
+		echo "<script>location='?page=pembayaran';</script>";
 		exit();
 	}
 

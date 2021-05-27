@@ -13,6 +13,10 @@
 			echo "Home";
 			break;
 		
+		case 'keranjang':
+			echo "Keranjang";
+			break;
+
 		default:
 			echo "404 Not Found";
 			break;

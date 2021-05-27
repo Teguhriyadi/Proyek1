@@ -1,8 +1,7 @@
 <?php
-	session_start();
-	$id_produk = $_GET['id'];
-	unset($_SESSION["keranjang"][$id_produk]);
+	$kode_barang = $_GET['kode_barang'];
+	unset($_SESSION["keranjang"][$kode_barang]);
 
 	echo "<script>alert('Produk Terhapus');</script>";
-	echo "<script>location='keranjang.php';</script>";
+	echo "<script>location='?page=keranjang';</script>";
 ?>

@@ -17,53 +17,48 @@
 			break;
 
 		case 'beli':
-			echo"";
+			include 'page/beli.php';
 			break;
 
 		case 'checkout':
-			echo"";
+			include 'page/checkout.php';
 			break;
 
 		case 'daftar':
-			echo"";
+			include 'page/daftar.php';
 			break;
 		
 		case 'hapus_keranjang':
-			echo"";
+			include 'page/hapus_keranjang.php';
 			break;
 
 		case 'keranjang':
-			echo"";
+			include 'page/keranjang.php';
 			break;
 
 		case 'lihat_pembayaran':
-			echo"";
+			include 'page/lihat_pembayaran.php';
 			break;
 
 		case 'login':
-			echo"";
-			break;
-
-		case 'logout':
-			echo"";
+			include "page/login.php";
 			break;
 
 		case 'nota':
-			echo"";
+			include 'page/nota.php';
 			break;
 
 		case 'pembayaran':
-			echo"";
-			break;
-
-		case 'product_delivery':
-			echo"";
+			include 'page/pembayaran.php';
 			break;
 			
 		case 'riwayat':
-			echo"";
+			include 'page/riwayat.php';
 			break;
 
+		case 'logout':
+			include 'page/logout.php';
+			break;
 
 		default:
 			echo "404 Not Found";

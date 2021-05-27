@@ -1,14 +1,11 @@
 <?php
-session_start();
-include 'koneksi.php';
 
 if (!isset($_SESSION["pelanggan"]) OR empty($_SESSION["pelanggan"])) {
 	echo "<script>alert('Maaf, Harus Login Terlebih Dahulu');</script>";
-	echo "<script>location='login.php';</script>";
-	exit();
+	echo "<script>window.location.replace('?page=login');</script>";
 }
 
-$idpem = $_GET['id'];
+$idpem = $_GET['id_pembelian'];
 $ambil = $con->query("SELECT * FROM pembelian WHERE id_pembelian = '$idpem'");
 $detpem = $ambil->fetch_assoc();
 
@@ -16,10 +13,9 @@ $id_pelanggan_beli = $detpem["id_pelanggan"];
 
 $id_pelanggan_login = $_SESSION['pelanggan']['id_pelanggan'];
 
-if ($id_pelanggan_login !==$id_pelanggan_beli) {
+if ($id_pelanggan_login !== $id_pelanggan_beli) {
 	echo "<script>alert('Dilarang');</script>";
-	echo "<script>location='riwayat.php';</script>";
-	exit();
+	
 }
 ?>
 <!DOCTYPE html>
