@@ -8,11 +8,11 @@
 
 ?>
 <script type="text/javascript">
-    function editPengiriman(id_ongkir) {
+    function editKategori(id_kategori) {
         $.ajax({
-            url : "http://localhost/Proyek1/admin/page/pengiriman/edit-pengiriman.php",
+            url : "http://localhost/Proyek1/admin/page/kategori/edit-kategori.php",
             type : "POST",
-            data : { id_ongkir : id_ongkir },
+            data : { id_kategori : id_kategori },
             success : function (data) {
                 $("#modal-update").html(data);
                 return true;
@@ -30,7 +30,7 @@
             });
         });
         window.setTimeout(function() {
-            window.location.replace("?page=pengiriman");
+            window.location.replace("?page=kategori");
         }, 3000);
     }
 
@@ -44,7 +44,7 @@
             });
         });
         window.setTimeout(function() {
-            window.location.replace("?page=pengiriman");
+            window.location.replace("?page=kategori");
         }, 3000);
     }
 
@@ -58,7 +58,7 @@
             });
         });
         window.setTimeout(function() {
-            window.location.replace("?page=pengiriman");
+            window.location.replace("?page=kategori");
         }, 3000);
     }
 
@@ -72,7 +72,21 @@
             });
         });
         window.setTimeout(function() {
-            window.location.replace("?page=pengiriman");
+            window.location.replace("?page=kategori");
+        }, 3000);
+    }
+
+    function duplikasi_data() {
+        setTimeout(function() {
+            swal({
+                title : 'GAGAL',
+                text : 'Tidak Boleh Ada Duplikasi Data',
+                type : 'error',
+                showConfirmationButton : true
+            });
+        });
+        window.setTimeout(function() {
+            window.location.replace("?page=kategori");
         }, 3000);
     }
 </script>
@@ -80,7 +94,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
-            <h3><i class="fa fa-bars"></i> Data pengiriman</h3>
+            <h3><i class="fa fa-bars"></i> Data Kategori</h3>
             <br>
         </div>
     </div>
@@ -88,7 +102,7 @@
         <li class="breadcrumb-item">
             <a href="?page=dashboard">Dashboard</a>
         </li>
-        <li class="breadcrumb-item active">Data pengiriman</li>
+        <li class="breadcrumb-item active">Data Kategori</li>
     </ol>
 
     <div class="card mb-3">
@@ -102,19 +116,21 @@
                     <thead>
                         <tr>
                             <th class="text-center">No.</th>
-                            <th>Nama pengiriman</th>
-                            <th class="text-center">Tarif</th>
+                            <th>Nama Pelanggan</th>
+                            <th class="text-center">Tanggal</th>
+                            <th class="text-center">Status Pembelian</th>
+                            <th class="text-center">Total</th>
                             <th class="text-center">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
                         $no = 0;
-                        $query = $con->query("SELECT * FROM pengiriman ORDER BY nama_kota ");
+                        $query = $con->query("SELECT * FROM pembelian JOIN pelanggan ON pembelian.id_pelanggan = pelanggan.id_pelanggan");
                         $bgcolor = "";
 
                         ?>
-                        <?php foreach ($query as $data_pengiriman) : ?>
+                        <?php foreach ($query as $data_pembelian) : ?>
                             <?php 
                             if ($no % 2 == 0) {
                                 $bgcolor = "#F0F0F0";
@@ -124,18 +140,17 @@
                             ?>
                             <tr bgcolor="<?php echo $bgcolor; ?>">
                                 <td class="text-center"><?php echo ++$no; ?>.</td>
-                                <td><?php echo $data_pengiriman['nama_kota']; ?></td>
-                                <td class="text-center">Rp. <?php echo number_format($data_pengiriman['tarif']); ?></td>
+                                <td><?php echo $data_pembelian['nama_pelanggan'] ?></td>
+                                <td class="text-center"><?php echo $data_pembelian['tanggal_pembelian'] ?></td>
+                                <td class="text-center"><?php echo $data_pembelian['status_pembelian']; ?></td>
+                                <td class="text-center">Rp. <?php echo number_format($data_pembelian['total_pembelian']); ?></td>
                                 <td class="text-center">
-                                    <button id="btn-edit-pengiriman" onclick="editPengiriman(<?php echo $data_pengiriman['id_ongkir'] ?>)" type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModalUpdate"><i class="fa fa-pencil"></i> Edit
-                                    </button>
-
-                                    <form class="d-inline" method="POST" >
-                                        <input type="hidden" name="id_ongkir" value="<?php echo $data_pengiriman['id_ongkir'] ?>">
-                                        <button onclick="return confirm('Yakin ? Anda Ingin Menghapus Data Ini ?')" name="btn-hapus" type="submit" class="btn btn-danger btn-sm">
-                                            <i class="fa fa-trash-o"></i> Hapus
-                                        </button>
-                                    </form>
+                                    <a href="?page=detail_pembelian&id_pembelian=<?php echo $data_pembelian['id_pembelian']; ?>" class="btn btn-info btn-sm">
+                                        <i class="fa fa-search"></i> Detail
+                                    </a>
+                                    <a href="?page=pembayaran&id_pembelian=<?php echo $data_pembelian['id_pembelian']; ?>" class="btn btn-success btn-sm">
+                                        <i class="fa fa-money"></i> Pembayaran
+                                    </a>
                                 </td>
                             </tr>
                         <?php endforeach ?>
@@ -151,7 +166,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-plus"></i> Tambah Data pengiriman</h5>
+                <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-plus"></i> Tambah Data Kategori</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -159,12 +174,8 @@
             <form id="form" method="POST">
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="nama_kota"> Nama Kota </label>
-                        <input type="text" class="form-control" id="nama_kota" name="nama_kota" placeholder="Masukkan Nama Kota" autocomplete="off">
-                    </div>
-                    <div class="form-group">
-                    	<label for="tarif"> Tarif </label>
-                    	<input type="number" class="form-control" id="tarif" name="tarif" placeholder="Masukkan Tarif" autocomplete="off" min="1">
+                        <label for="nama_kategori"> Nama Kategori </label>
+                        <input type="text" class="form-control" id="nama_kategori" name="nama_kategori" placeholder="Masukkan Nama Kategori" autocomplete="off">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -182,12 +193,12 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-pencil"></i> Edit Data pengiriman</h5>
+                <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-pencil"></i> Edit Data Kategori</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST" action="?page=aksi-edit-pengiriman">
+            <form method="POST" action="?page=aksi-edit-kategori">
                 <div class="modal-body" id="modal-update">
                     
                 </div>
@@ -201,21 +212,20 @@
 </div>
 <!-- END -->
 
-<!-- Fungsi Tambah pengiriman -->
+<!-- Fungsi Tambah Kategori -->
 <?php
     if (isset($_POST['btn-simpan'])) {
-        $nama_kota = $_POST['nama_kota'];
-        $tarif = $_POST['tarif'];
+        $nama_kategori = $_POST['nama_kategori'];
 
-        $result = $con->query("SELECT nama_kota FROM pengiriman WHERE nama_kota = '$nama_kota'");
+        $result = $con->query("SELECT nama_kategori FROM kategori WHERE nama_kategori = '$nama_kategori'");
 
         if (mysqli_fetch_assoc($result) > 0) {
             echo "<script>alert('Tidak Boleh Ada Duplikasi Data');</script>";
-            echo "<script>location='?page=pengiriman';</script>";
+            echo "<script>location='?page=kategori';</script>";
             exit;
         }
 
-        $query = $con->query("INSERT INTO pengiriman VALUES ('','$nama_kota', '$tarif')");
+        $query = $con->query("INSERT INTO kategori VALUES ('','$nama_kategori', '')");
 
         if ($query != 0) {
             echo "<script>berhasil();</script>";
@@ -226,12 +236,12 @@
 ?>
 <!-- END -->
 
-<!-- Fungsi Hapus pengiriman -->
+<!-- Fungsi Hapus Kategori -->
 <?php
     if (isset($_POST['btn-hapus'])) {
-        $id_ongkir = $_POST['id_ongkir'];
+        $id_kategori = $_POST['id_kategori'];
 
-        $query = $con->query("DELETE FROM pengiriman WHERE id_ongkir = $id_ongkir");
+        $query = $con->query("DELETE FROM kategori WHERE id_kategori = $id_kategori");
 
         if ($query != 0) {
             echo "<script>berhasil_hapus();</script>";

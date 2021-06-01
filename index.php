@@ -7,6 +7,7 @@
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
+  <meta http-equiv="refresh" content="60">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- Bootstrap CSS -->
@@ -17,9 +18,9 @@
 </head>
 <body>
 
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
     <div class="container">
-      <a class="navbar-brand" href="?page=dashboard">IO - Keeper</a>
+      <a class="navbar-brand" href="?page=dashboard"><i class="fa fa-apple"></i> IO - Keeper</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -49,12 +50,12 @@
           </li>
         </ul>
         <?php if (@$_SESSION['pelanggan'] == "") : ?>
-          <a href="?page=login" class="btn btn-success">
+          <a href="?page=login" class="btn btn-success btn-sm">
             <i class="fa fa-sign-in"></i> Masuk / Login
           </a>
         </form>
         <?php else : ?>
-          <a href="?page=logout" class="btn btn-danger">
+          <a href="?page=logout" class="btn btn-danger btn-sm">
             <i class="fa fa-sign-out"></i> Logout
           </a>
         <?php endif ?>
@@ -62,6 +63,7 @@
     </div>
   </nav>
 
+  <br><br>
   <?php require 'mod/halaman.php'; ?>
 
   <footer class="warna-bg">

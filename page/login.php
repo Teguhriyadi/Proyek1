@@ -1,19 +1,74 @@
+<style type="text/css">
+	body {
+		background: #d5f0f3;
+	}
+	h1{
+		text-align: center;
+		font-weight: 300;
+	}
 
-<form method="POST">
-	<div class="container">
-		<div class="form-group">
-			<label for="email"> Email </label>
-			<input type="email" class="form-control" name="email_pelanggan" placeholder="Masukkan Email">
-		</div>
-		<div class="form-group">
-			<label for="username"> Password </label>
-			<input type="text" class="form-control" name="password_pelanggan" placeholder="Masukkan password">
-		</div>
-		<div class="form-group">
-			<button class="btn btn-primary" name="btn-login"> Login </button>
-		</div>
-	</div>
-</form>
+	.tulisan_login{
+		text-align: center;
+		text-transform: uppercase;
+	}
+
+	.kotak_login{
+		width: 350px;
+		background: white;
+		margin: 80px auto;
+		padding: 30px 20px;
+	}
+
+	label{
+		font-size: 11pt;
+	}
+
+	.form_login{
+		box-sizing : border-box;
+		width: 100%;
+		padding: 10px;
+		font-size: 11pt;
+		margin-bottom: 20px;
+	}
+
+	.tombol_login{
+		background: #46de4b;
+		color: white;
+		font-size: 11pt;
+		width: 100%;
+		border: none;
+		border-radius: 3px;
+		padding: 10px 20px;
+	}
+
+	.link{
+		color: #232323;
+		text-decoration: none;
+		font-size: 10pt;
+	}
+</style>
+
+<div class="kotak_login">
+	<p class="tulisan_login">Silahkan login</p>
+
+	<form method="POST">
+		<label>Username</label>
+		<input type="text" name="email_pelanggan" class="form_login" placeholder="Email ..">
+
+		<label>Password</label>
+		<input type="password" name="password_pelanggan" class="form_login" placeholder="Password ..">
+
+		<input type="submit" class="tombol_login" name="btn-login" value="LOGIN">
+
+		<br/>
+		<br/>
+		<center>
+			<a class="link" href="https://www.malasngoding.com">Belum Punya Akun ?</a>
+		</center>
+	</form>
+
+</div>
+<div style="padding-top: 11px;"></div>
 <?php 
 
 if (isset($_POST['btn-login'])) {
@@ -55,4 +110,3 @@ if (isset($_POST['btn-login'])) {
 }
 
 ?>
-<br><br>

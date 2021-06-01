@@ -11,17 +11,24 @@
 
 <div class="container">
 	<div class="row">
+		<div class="col-md-4">
+			<h1><i class="fa fa-shopping-cart"></i> Produk</h1>
+		</div>
+		<div class="col-md-8 mt-2">
+			<form>
+				<div class="form-group">
+					<input type="text" class="form-control" name="" placeholder="Cari Produk Yang Kamu Inginkan">
+				</div>
+			</form>
+		</div>
+	</div>
+	<hr>
+	<div class="row">
 		<?php
 		$no = 0;
 		$query = $con->query("SELECT * FROM barang ORDER BY kode_barang ASC");
-		$bgcolor = "";
 		if (mysqli_num_rows($query)) {
 			while ($data = $query->fetch_array()) {
-				if ($no % 2 == 0) {
-					$bgcolor = "#F0F0F0";
-				} else {
-					$bgcolor = "";
-				}
 				$kdBarang = $data['kode_barang'];
 
 				$sql_masuk = $con->query("select sum(stok) as 'stok' from transaksi_barang where kode_barang = '$kdBarang' and status = 1");
@@ -51,10 +58,10 @@
 							<h5 class="card-text"><a href="#" class="text-primary">Rp. <?php echo number_format($data['harga']) ?></a></h5>
 						</div>
 						<div class="card-footer">
-						<a href="?page=detail&kode_barang=<?php echo $data['kode_barang']; ?>">
+						<a class="btn btn-success btn-sm" href="?page=detail&kode_barang=<?php echo $data['kode_barang']; ?>">
 							<i class="fa fa-search"></i> Detail
 						</a> |
-						<a href="?page=beli&kode_barang=<?php echo $data['kode_barang']; ?>">
+						<a class="btn btn-primary btn-sm" href="?page=beli&kode_barang=<?php echo $data['kode_barang']; ?>">
 							<i class="fa fa-shopping-cart"></i> Beli
 						</a> |
 						Stok : <?php echo $jum ?>

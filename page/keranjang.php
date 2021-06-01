@@ -7,9 +7,9 @@ if (empty($_SESSION["keranjang"]) OR !isset($_SESSION["keranjang"])) {
 
 <br>
 <div class="container">
-	<h3> Keranjang Belanja 
+	<h3> <i class="fa fa-shopping-cart"></i> Keranjang Belanja 
 	<a href="?page=dashboard" class="btn btn-success btn-sm pull-right"><i class="icon-arrow-left"></i> 
-			Lanjutkan Belanja 
+			<i class="fa fa-refresh"></i> Lanjutkan Belanja 
 		</a>
 	</h3>
 	<hr>
@@ -26,6 +26,7 @@ if (empty($_SESSION["keranjang"]) OR !isset($_SESSION["keranjang"])) {
 		</thead>
 		<tbody>
 			<?php $no = 0; ?>
+			<?php $totalbelanja = 0; ?>
 			<?php foreach ($_SESSION["keranjang"] as $kode_barang => $jumlah): ?>
 				<?php
 				$ambil = $con->query("SELECT * FROM barang WHERE kode_barang = '$kode_barang'");
@@ -42,16 +43,22 @@ if (empty($_SESSION["keranjang"]) OR !isset($_SESSION["keranjang"])) {
 					</td>
 					<td style="text-align: center;">Rp. <?php echo number_format($subharga); ?></td>
 					<td style="text-align: center;">
-						<a href="?page=hapus_keranjang&kode_barang=<?php echo $kode_barang; ?>" class="btn btn-danger">
-							Hapus
+						<a onclick="return confirm('Yakin ? Anda Ingin Menghapus ?')" href="?page=hapus_keranjang&kode_barang=<?php echo $kode_barang; ?>" class="btn btn-danger btn-sm">
+							<i class="fa fa-trash-o"></i> Hapus
 						</a>
 					</td>
 				</tr>
+				<?php $totalbelanja+=$subharga; ?>
 			<?php endforeach ?>
 		</tbody>
+		<tfoot>
+			<tr>
+				<th colspan="6" style="text-align: center;">Total Belanja : Rp. <?php echo number_format($totalbelanja); ?> </th>
+			</tr>
+		</tfoot>
 	</table>
 	<a href="?page=checkout" class="btn btn-primary">
-		Checkout
+		<i class="fa fa-sign-in"></i> Checkout
 	</a>
 </div>
 <br>

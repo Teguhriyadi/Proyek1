@@ -15,7 +15,7 @@ $id_pelanggan_login = $_SESSION['pelanggan']['id_pelanggan'];
 
 if ($id_pelanggan_login !== $id_pelanggan_beli) {
 	echo "<script>alert('Dilarang');</script>";
-	
+	echo "<script>window.location.replace('?page=dashboard');</script>";
 }
 ?>
 <br>
@@ -25,20 +25,20 @@ if ($id_pelanggan_login !== $id_pelanggan_beli) {
 			<tr class="techSpecRow">
 				<th colspan="2">
 					<h4>
-						Konfirmasi Pembayaran
+						<i class="fa fa-map"></i> Konfirmasi Pembayaran
 					</h4>
 				</th>
 			</tr>
 			<tr class="techSpecRow">
 				<td>Nama Pelanggan</td>
 				<td>
-					<input type="text" name="nama" class="form-control" required placeholder="Nama Pelanggan">
+					<input type="text" name="nama" class="form-control" required placeholder="Nama Pelanggan" value="<?php echo $_SESSION['pelanggan']['nama_pelanggan']; ?>" readonly>
 				</td>
 			</tr>
 			<tr class="techSpecRow">
 				<td>Nama Bank</td>
 				<td>
-					<input type="text" class="form-control" name="bank" required placeholder="Nama Bank" value="PT. Jaya Abadi" readonly style="background-color: white;">
+					<input type="text" class="form-control" name="bank" required placeholder="Nama Bank" value="PT. IO - Keeper / No. Rek : 12345678910" readonly style="background-color: white;">
 				</td>
 			</tr>
 			<tr class="techSpecRow">
@@ -59,7 +59,7 @@ if ($id_pelanggan_login !== $id_pelanggan_beli) {
 						<i class="fa fa-save"></i> Kirim Data
 					</button>
 					<button class="btn btn-danger btn-sm" type="reset">
-						Reset
+						<i class="fa fa-refresh"></i> Reset
 					</button>
 				</td>
 			</tr>

@@ -9,7 +9,7 @@ if (!isset($_SESSION["pelanggan"])) {
 ?>
 <br>
 <div class="container">
-	<h4>Data Checkout</h4>
+	<h4><i class="fa fa-folder-open"></i> Data Checkout</h4>
 	<table class="table table-bordered">
 		<thead>
 			<tr>
@@ -50,30 +50,30 @@ if (!isset($_SESSION["pelanggan"])) {
 
 	<table class="table table-bordered">
 		<form method="post">
-			<tr class="techSpecRow">
+			<tr>
 				<th colspan="2">
-					<h4>Data Pelanggan : </h4>
+					<h4><i class="fa fa-user"></i> Data Pelanggan : </h4>
 				</th>
 			</tr>
-			<tr class="techSpecRow">
+			<tr>
 				<td>Nama Pelanggan Yang Beli : </td>
 				<td>
 					<?php echo $_SESSION['pelanggan']['nama_pelanggan']; ?>
 				</td>
 			</tr>
-			<tr class="techSpecRow">
+			<tr>
 				<td>Telepon Pelanggan</td>
 				<td>
 					<?php echo $_SESSION['pelanggan']['telepon_pelanggan']; ?>
 				</td>
 			</tr>
-			<tr class="techSpecRow">
+			<tr>
 				<td>Pilih Ongkir : </td>
 				<td>
 					<select name="id_ongkir" class="form-control">
 						<option value="">- Pilih Ongkir -</option>
 						<?php
-						$sql = $con->query("SELECT * FROM pengiriman");
+						$sql = $con->query("SELECT * FROM pengiriman ORDER BY nama_kota");
 						while ($data = $sql->fetch_array()) {
 							?>
 							<option value="<?php echo $data['id_ongkir']; ?>">
@@ -91,10 +91,10 @@ if (!isset($_SESSION["pelanggan"])) {
 					<textarea name="alamat_pengiriman" class="form-control" rows="4" placeholder="Alamat Lengkap"></textarea>
 				</td>
 			</tr>
-			<tr class="techSpecRow">
+			<tr>
 				<th colspan="2">
 					<button class="btn btn-primary btn-sm" name="print">
-						Checkout
+						<i class="fa fa-sign-out"></i> Checkout
 					</button>
 				</th>
 			</tr>

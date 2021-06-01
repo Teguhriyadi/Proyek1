@@ -39,7 +39,7 @@
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
   <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="?page=dashboard"><i class="fa fa-apple"></i> IO - Keeper</a>
+    <a class="navbar-brand" href="?page=dashboard"><i class="fa fa-edit"></i> IO - Keeper</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -71,7 +71,7 @@
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Supplier">
           <a class="nav-link" href="?page=pengiriman">
-            <i class="fa fa-fw fa-pencil"></i>
+            <i class="fa fa-fw fa-bus"></i>
             <span class="nav-link-text">Pengiriman</span>
           </a>
         </li>
@@ -81,19 +81,11 @@
             <span class="nav-link-text">Transaksi</span>
           </a>
         </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
-          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
-            <i class="fa fa-fw fa-area-chart"></i>
-            <span class="nav-link-text">Report</span>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Supplier">
+          <a class="nav-link" href="?page=pembelian">
+            <i class="fa fa-fw fa-money"></i>
+            <span class="nav-link-text">Pembelian</span>
           </a>
-          <ul class="sidenav-second-level collapse" id="collapseComponents">
-            <li>
-              <a href="navbar.html">Navbar</a>
-            </li>
-            <li>
-              <a href="cards.html">Cards</a>
-            </li>
-          </ul>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponentsTwo" data-parent="#exampleAccordion">

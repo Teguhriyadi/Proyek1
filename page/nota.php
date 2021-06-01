@@ -14,30 +14,30 @@ if ($idpelangganyangbeli!==$idpelangganyanglogin) {
 	echo "<script>location='?page=riwayat';</script>";
 }
 ?>
-<div class="container">
-	<h4>Detail Nota Pembelian Pelanggan : </h4>
+<div class="container " style="padding-top: 20px;">
+	<h4><i class="fa fa-search"></i> Detail Nota Pembelian Pelanggan : </h4>
 	<table class="table table-bordered">
 		<tbody>
-			<tr class="techSpecRow">
+			<tr>
 				<th colspan="2">Data Nota : </th>
 			</tr>
-			<tr class="techSpecRow">
+			<tr>
 				<td class="techSpecTD1">Nama Pelanggan</td>
 				<td class="techSpecTD2"><?php echo $detail['nama_pelanggan']; ?></td>
 			</tr>
-			<tr class="techSpecRow">
+			<tr>
 				<td class="techSpecTD1">No Telepon Pelanggan</td>
 				<td class="techSpecTD2"><?php echo $detail['telepon_pelanggan']; ?></td>
 			</tr>
-			<tr class="techSpecRow">
+			<tr>
 				<td class="techSpecTD1">Email Pelanggan</td>
 				<td class="techSpecTD2"> <?php echo $detail['email_pelanggan']; ?></td>
 			</tr>
-			<tr class="techSpecRow">
+			<tr>
 				<td class="techSpecTD1">Tanggal Pembelian Barang</td>
 				<td class="techSpecTD2"> <?php echo $detail['tanggal_pembelian']; ?></td>
 			</tr>
-			<tr class="techSpecRow">
+			<tr>
 				<td class="techSpecTD1">Total Belanja Keseluruhan</td>
 				<td class="techSpecTD2">Rp. <?php echo number_format($detail['total_pembelian']); ?></td>
 			</tr>
@@ -46,26 +46,26 @@ if ($idpelangganyangbeli!==$idpelangganyanglogin) {
 
 	<table class="table table-bordered">
 		<tbody>
-			<tr class="techSpecRow">
+			<tr>
 				<th colspan="2">
 					<h4>
 						Data Nota Pembelian : 
 					</h4>
 				</th>
 			</tr>
-			<tr class="techSpecRow">
+			<tr>
 				<td>No Pembelian :</td>
 				<td>
 					<?php echo $detail['id_pembelian']; ?>
 				</td>
 			</tr>
-			<tr class="techSpecRow">
+			<tr>
 				<td>Tanggal </td>
 				<td>
 					<?php echo $detail['tanggal_pembelian']; ?>
 				</td>
 			</tr>
-			<tr class="techSpecRow">
+			<tr>
 				<td>Total Belanja :</td>
 				<td>
 					Rp. <?php echo number_format($detail['total_pembelian']); ?>
@@ -73,26 +73,26 @@ if ($idpelangganyangbeli!==$idpelangganyanglogin) {
 			</tr>
 		</tbody>
 		<tbody>
-			<tr class="techSpecRow">
+			<tr>
 				<th colspan="2">
 					<h4>
 						Data Nota Pelanggan :
 					</h4>
 				</th>
 			</tr>
-			<tr class="techSpecRow">
+			<tr>
 				<td>Nama Pelanggan  :</td>
 				<td>
 					<?php echo $detail['nama_pelanggan']; ?>
 				</td>
 			</tr>
-			<tr class="techSpecRow">
+			<tr>
 				<td>Telepon Pelanggan : </td>
 				<td>
 					<?php echo $detail['telepon_pelanggan']; ?>
 				</td>
 			</tr>
-			<tr class="techSpecRow">
+			<tr>
 				<td>Email Pelanggan : </td>
 				<td>
 					<?php echo $detail['email_pelanggan']; ?>
@@ -100,14 +100,14 @@ if ($idpelangganyangbeli!==$idpelangganyanglogin) {
 			</tr>
 		</tbody>
 		<tbody>
-			<tr class="techSpecRow">
+			<tr>
 				<th colspan="2">
 					<h4>
 						Data Nota Pengiriman : 
 					</h4>
 				</th>
 			</tr>
-			<tr class="techSpecRow">
+			<tr>
 				<td>Nama Kota : </td>
 				<td>
 					<?php echo $detail['nama_kota']; ?>
@@ -119,7 +119,7 @@ if ($idpelangganyangbeli!==$idpelangganyanglogin) {
 					Rp. <?php echo number_format($detail['tarif']); ?>
 				</td>
 			</tr>
-			<tr class="techSpecRow">
+			<tr>
 				<td>Alamat yang di tuju</td>
 				<td>
 					<?php echo $detail['alamat_pengiriman']; ?>
@@ -127,15 +127,14 @@ if ($idpelangganyangbeli!==$idpelangganyanglogin) {
 			</tr>
 		</tbody>
 	</table>
-	<table class="table table-bordered"></table>
 	<table class="table table-bordered">
 		<thead>
 			<tr>
-				<th style="text-align: center;">No.</th>
+				<th class="text-center">No.</th>
 				<th>Nama Barang</th>
-				<th style="text-align: center; width: 100px;">Harga</th>
-				<th style="text-align: center; width: 120px;">Jumlah Beli</th>
-				<th style="text-align: center; width: 120px"> Total Harga </th>
+				<th class="text-center">Harga</th>
+				<th class="text-center">Jumlah Beli</th>
+				<th class="text-center"> Total Harga </th>
 			</tr>
 		</thead>
 		<tbody>
@@ -145,14 +144,14 @@ if ($idpelangganyangbeli!==$idpelangganyanglogin) {
 			while ($pecah = $ambil->fetch_array()) {
 				?>
 				<tr>
-					<td style="text-align: center;"><?php echo ++$no; ?>.</td>
+					<td class="text-center"><?php echo ++$no; ?>.</td>
 					<td><?php echo $pecah['nama_barang']; ?></td>
-					<td style="text-align: center;">Rp. <?php echo number_format($pecah['harga']); ?></td>
-					<td style="text-align: center;"><?php echo $pecah['jumlah']; ?></td>
+					<td class="text-center">Rp. <?php echo number_format($pecah['harga']); ?></td>
+					<td class="text-center"><?php echo $pecah['jumlah']; ?></td>
 					<?php
 						$jum_beli = $pecah['harga'] * $pecah['jumlah'];
 					?>
-					<td style="text-align: center;">Rp. <?php echo number_format($jum_beli); ?></td>
+					<td class="text-center">Rp. <?php echo number_format($jum_beli); ?></td>
 				</tr>
 				<?php
 			}

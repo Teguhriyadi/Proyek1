@@ -62,6 +62,14 @@
             echo "Data Transaksi";
             break;
 
+        case 'pembelian':
+            echo "Data Pembelian";
+            break;
+
+        case 'detail_pembelian':
+            echo "Detail Pembelian";
+            break;
+
         case 'informasi':
             echo "Data Informasi";
             break;

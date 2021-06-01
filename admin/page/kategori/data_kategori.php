@@ -75,6 +75,20 @@
             window.location.replace("?page=kategori");
         }, 3000);
     }
+
+    function duplikasi_data() {
+        setTimeout(function() {
+            swal({
+                title : 'GAGAL',
+                text : 'Tidak Boleh Ada Duplikasi Data',
+                type : 'error',
+                showConfirmationButton : true
+            });
+        });
+        window.setTimeout(function() {
+            window.location.replace("?page=kategori");
+        }, 3000);
+    }
 </script>
 
 <div class="container-fluid">

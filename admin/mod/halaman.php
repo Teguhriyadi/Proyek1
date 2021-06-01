@@ -116,6 +116,16 @@
             include 'page/pengiriman/aksi/edit_pengiriman.php';
             break;
 
+        // END
+
+        case 'pembelian':
+            include 'page/pembelian/data_pembelian.php';
+            break;
+
+        case 'detail_pembelian':
+            include 'page/pembelian/detail_pembelian.php';
+            break;
+
         // Informasi
         case 'informasi' :
             include 'page/informasi/data_informasi.php';
@@ -141,6 +151,11 @@
             include 'page/saran/data_saran.php';
             break;
         // END
+
+        // pembayaran
+        case 'pembayaran':
+            include 'page/pembelian/data_pembayaran.php';
+            break;
         
         // Logout
         case 'logout' :
