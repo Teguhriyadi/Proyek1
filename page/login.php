@@ -63,7 +63,7 @@
 		<br/>
 		<br/>
 		<center>
-			<a class="link" href="https://www.malasngoding.com">Belum Punya Akun ?</a>
+			<a class="link" href="?page=daftar">Belum Punya Akun ?</a>
 		</center>
 	</form>
 

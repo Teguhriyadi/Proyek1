@@ -29,7 +29,7 @@ foreach ($query as $edit) {
         <li class="breadcrumb-item">
             <a href="?page=dashboard">Dashboard</a>
         </li>
-        <li class="breadcrumb-item active">Data Kategori</li>
+        <li class="breadcrumb-item active">Detail Pembelian</li>
     </ol>
 
     <div class="row">

@@ -111,8 +111,7 @@
 
     <div class="card mb-3">
         <div class="card-header">
-            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus"></i> Tambah Data
-            </button>
+            Detail
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -148,14 +147,7 @@
                                 <td class="text-center"><?php echo $data_pembelian['tanggal_pembelian'] ?></td>
                                 <td class="text-center"><?php echo $data_pembelian['status_pembelian']; ?></td>
                                 <td class="text-center">Rp. <?php echo number_format($data_pembelian['total_pembelian']); ?></td>
-                                <td class="text-center">
-                                    <a href="?page=detail_pembelian&id_pembelian=<?php echo $data_pembelian['id_pembelian']; ?>" class="btn btn-info btn-sm">
-                                        <i class="fa fa-search"></i> Detail
-                                    </a>
-                                    <a href="?page=pembayaran" class="btn btn-success btn-sm">
-                                        <i class="fa fa-money"></i> Pembayaran
-                                    </a>
-                                </td>
+                                <td class="text-center"></td>
                             </tr>
                         <?php endforeach ?>
                     </tbody>
