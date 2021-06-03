@@ -89,7 +89,7 @@
 					<h6 class="card-title text-info"><?php echo $edit['nama_barang']; ?></h6>
 					<h5 class="card-text"><a href="#" class="text-primary">Rp. <?php echo number_format($edit['harga']) ?></a></h5>
 					<form method="POST">
-						<input type="number" class="form-control" name="jumlah" min="1" autocomplete="off" max="<?php echo $jum ?>">
+						<input type="number" class="form-control" name="jumlah" min="1" autocomplete="off" max="<?php echo $jum ?>" placeholder="0">
 						<br>
 						<button type="submit" name="beli" class="btn btn-primary btn-sm btn-block">
 							<i class="fa fa-shopping-cart"></i> Beli
