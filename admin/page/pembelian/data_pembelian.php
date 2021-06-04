@@ -94,7 +94,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
-            <h3><i class="fa fa-bars"></i> Data Kategori</h3>
+            <h3><i class="fa fa-money"></i> Data Pembelian</h3>
             <br>
         </div>
     </div>
@@ -102,13 +102,12 @@
         <li class="breadcrumb-item">
             <a href="?page=dashboard">Dashboard</a>
         </li>
-        <li class="breadcrumb-item active">Data Kategori</li>
+        <li class="breadcrumb-item active">Data Pembelian</li>
     </ol>
 
     <div class="card mb-3">
         <div class="card-header">
-            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus"></i> Tambah Data
-            </button>
+            Data Pembelian
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -142,15 +141,31 @@
                                 <td class="text-center"><?php echo ++$no; ?>.</td>
                                 <td><?php echo $data_pembelian['nama_pelanggan'] ?></td>
                                 <td class="text-center"><?php echo $data_pembelian['tanggal_pembelian'] ?></td>
-                                <td class="text-center"><?php echo $data_pembelian['status_pembelian']; ?></td>
+                                <td class="text-center">
+                                    <?php if ($data_pembelian['status_pembelian'] == "barang_dikirim") : ?>
+                                        Barang Dikirim
+                                    <?php elseif($data_pembelian['status_pembelian'] == "lunas") : ?>
+                                        Lunas
+                                    <?php elseif($data_pembelian['status_pembelian'] == "pending") : ?>
+                                        Pending
+                                    <?php elseif($data_pembelian['status_pembelian'] == "sudah kirim pembayaran") : ?>
+                                        Sudah Kirim Pembayaran
+                                    <?php else : ?>
+                                        Tidak Ada
+                                    <?php endif ?>
+                                </td>
                                 <td class="text-center">Rp. <?php echo number_format($data_pembelian['total_pembelian']); ?></td>
                                 <td class="text-center">
                                     <a href="?page=detail_pembelian&id_pembelian=<?php echo $data_pembelian['id_pembelian']; ?>" class="btn btn-info btn-sm">
                                         <i class="fa fa-search"></i> Detail
                                     </a>
-                                    <a href="?page=pembayaran&id_pembelian=<?php echo $data_pembelian['id_pembelian']; ?>" class="btn btn-success btn-sm">
-                                        <i class="fa fa-money"></i> Pembayaran
-                                    </a>
+                                    <?php if ($data_pembelian['status_pembelian'] == "barang_dikirim") : ?>
+
+                                    <?php else : ?>
+                                        <a href="?page=pembayaran&id_pembelian=<?php echo $data_pembelian['id_pembelian']; ?>" class="btn btn-success btn-sm">
+                                            <i class="fa fa-money"></i> Pembayaran
+                                        </a>
+                                    <?php endif ?>
                                 </td>
                             </tr>
                         <?php endforeach ?>

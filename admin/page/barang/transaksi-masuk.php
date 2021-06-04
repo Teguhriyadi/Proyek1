@@ -24,18 +24,10 @@ if (isset($_POST['kode_barang'])) {
     <input type="text" id="nama_barang" class="form-control" name="nama_barang" value="<?php echo $edit['nama_barang']; ?>" readonly>
 </div>
 <div class="row">
-    <!--
-    <div class="col-md-6">
-        <div class="form-group">
-            <label for="satuan_stok"> Satuan Stok </label>
-            <input type="text" id="satuan_stok" class="form-control" name="satuan_stok" placeholder="Masukkan Kode Satuan Stok">
-        </div>
-    </div>
-    -->
     <div class="col-md-12">
         <div class="form-group">
             <label for="jumlah"> QTY </label>
-            <input type="number" id="jumlah" name="stok" class="form-control" placeholder="0" autocomplete="off">
+            <input type="number" id="jumlah" name="stok" class="form-control" placeholder="0" autocomplete="off" min="1">
         </div>
     </div>
 </div>

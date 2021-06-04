@@ -93,16 +93,16 @@
 </script>
 
 <?php
-    $query = "SELECT max(kode_barang) as maxKode from barang";
-    $hasil = mysqli_query($con, $query);
-    $data = $hasil->fetch_array();
-    $kodeBarang = $data['maxKode'];
+$query = "SELECT max(kode_barang) as maxKode from barang";
+$hasil = mysqli_query($con, $query);
+$data = $hasil->fetch_array();
+$kodeBarang = $data['maxKode'];
 
-    $noUrut = (int) substr($kodeBarang, 3,3);
-    $noUrut++;
+$noUrut = (int) substr($kodeBarang, 3,3);
+$noUrut++;
 
-    $char = "BR-";
-    $newID = $char . sprintf("%03s", $noUrut);
+$char = "BR-";
+$newID = $char . sprintf("%03s", $noUrut);
 ?>
 
 <div class="container-fluid">
@@ -162,45 +162,51 @@
                                 $sql_keluar = $con->query("select sum(stok) as'stok' from transaksi_barang where kode_barang ='$kdBarang' and status = 0 ");
                                 $data_keluar = $sql_keluar->fetch_array();
                                 $jum_keluar = $data_keluar['stok'];
-                                $jumlah_barang = $jum_masuk - $jum_keluar;
-                                // $bgcolor = "";
-                        
-                        ?>
-                            <tr bgcolor="<?php echo $bgcolor; ?>">
-                                <td class="text-center"><?php echo ++$no; ?>.</td>
-                                <td class="text-center"><?php echo $data_barang['kode_barang']; ?></td>
-                                <td><?php echo $data_barang['nama_barang']; ?></td>
-                                <td class="text-center">Rp. <?php echo number_format($data_barang['harga']); ?></td>
-                                <td class="text-center"><?php echo $jumlah_barang; ?></td>
-                                <td class="text-center">
-                                    <button onclick="tambahTransaksiBarang('<?php echo $data_barang['kode_barang']; ?>')" type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#exampleModalTransaksiMasuk"><i class="fa fa-plus"></i> Tambah
-                                    </button>
-                                </td>
-                                <td class="text-center">
-                                    <?php if ($jumlah_barang == 0) : ?>
-                                        <b><i>Stok Kosong</i></b>
-                                    <?php else : ?>
-                                        <button onclick="kurangiTransaksiBarang('<?php echo $data_barang['kode_barang']; ?>')" type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModalTransaksiKeluar"><i class="fa fa-minus"></i> Kurangi
-                                        </button>
-                                    <?php endif ?>
-                                </td>
-                                <td class="text-center">
-                                    <button onclick="editBarang('<?php echo $data_barang['kode_barang'] ?>')" type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModalUpdate"><i class="fa fa-pencil"></i> Edit
-                                    </button>
-                                    <!-- END -->
+ //                               $jumlah_barang = $jum_masuk - $jum_keluar;
 
-                                    <form class="d-inline" method="POST">
-                                        <input type="hidden" name="kode_barang" value="<?php echo $data_barang['kode_barang']; ?>">
-                                        <button onclick="return confirm('Yakin ? Anda Ingin Menghapus Data Ini ?')" name="btn-hapus" type="submit" class="btn btn-danger btn-sm">
-                                            <i class="fa fa-trash-o"></i> Hapus
+                                $sql_beli_masuk = $con->query("SELECT sum(jumlah) as 'jumlah_masuk' FROM pembelian_barang WHERE kode_barang = '$kdBarang'");
+
+                                $data_beli_masuk = $sql_beli_masuk->fetch_array();
+                                $jum_beli_masuk = $data_beli_masuk['jumlah_masuk'];
+                                $jum = $jum_masuk - $jum_keluar - $jum_beli_masuk;
+                                // $bgcolor = "";
+
+                                ?>
+                                <tr bgcolor="<?php echo $bgcolor; ?>">
+                                    <td class="text-center"><?php echo ++$no; ?>.</td>
+                                    <td class="text-center"><?php echo $data_barang['kode_barang']; ?></td>
+                                    <td><?php echo $data_barang['nama_barang']; ?></td>
+                                    <td class="text-center">Rp. <?php echo number_format($data_barang['harga']); ?></td>
+                                    <td class="text-center"><?php echo $jum; ?></td>
+                                    <td class="text-center">
+                                        <button onclick="tambahTransaksiBarang('<?php echo $data_barang['kode_barang']; ?>')" type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#exampleModalTransaksiMasuk"><i class="fa fa-plus"></i> Tambah
                                         </button>
-                                    </form>
-                                </td>
-                            </tr>
-                            <?php
+                                    </td>
+                                    <td class="text-center">
+                                        <?php if ($jum == 0) : ?>
+                                            <b><i>Stok Kosong</i></b>
+                                        <?php else : ?>
+                                            <button onclick="kurangiTransaksiBarang('<?php echo $data_barang['kode_barang']; ?>')" type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModalTransaksiKeluar"><i class="fa fa-minus"></i> Kurangi
+                                            </button>
+                                        <?php endif ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <button onclick="editBarang('<?php echo $data_barang['kode_barang'] ?>')" type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModalUpdate"><i class="fa fa-pencil"></i> Edit
+                                        </button>
+                                        <!-- END -->
+
+                                        <form class="d-inline" method="POST">
+                                            <input type="hidden" name="kode_barang" value="<?php echo $data_barang['kode_barang']; ?>">
+                                            <button onclick="return confirm('Yakin ? Anda Ingin Menghapus Data Ini ?')" name="btn-hapus" type="submit" class="btn btn-danger btn-sm">
+                                                <i class="fa fa-trash-o"></i> Hapus
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                <?php
                             }
                         }
-                    ?>
+                        ?>
                     </tbody>
                 </table>
             </div>
@@ -233,7 +239,7 @@
                                 <select id="id_kategori" name="id_kategori" class="form-control">
                                     <option value="">- Pilih -</option>
                                     <?php
-                                        $queryKategori = $con->query("SELECT * FROM kategori ORDER BY nama_kategori ASC");
+                                    $queryKategori = $con->query("SELECT * FROM kategori ORDER BY nama_kategori ASC");
                                     ?>
                                     <?php foreach ($queryKategori as $kategori_data) : ?>
                                         <option value="<?php echo $kategori_data['id_kategori']; ?>">
@@ -300,7 +306,7 @@
             </div>
             <form method="POST" action="?page=aksi-edit-barang" enctype="multipart/form-data">
                 <div class="modal-body" id="modal-update">
-                    
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal"><i class="fa fa-refresh"></i> Batal</button>
@@ -324,7 +330,7 @@
             </div>
             <form method="POST" action="?page=aksi-tambah-transaksi">
                 <div class="modal-body" id="modal-transaksi-masuk">
-                    
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal"><i class="fa fa-refresh"></i> Batal</button>
@@ -348,7 +354,7 @@
             </div>
             <form method="POST" action="?page=aksi-keluar-transaksi">
                 <div class="modal-body" id="modal-transaksi-keluar">
-                    
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal"><i class="fa fa-refresh"></i> Batal</button>
@@ -362,18 +368,18 @@
 
 <!-- Fungsi Tambah Data -->
 <?php
-    if (isset($_POST['btn-simpan'])) {
-        $kode_barang = $_POST['kode_barang'];
-        $id_kategori = $_POST['id_kategori'];
-        $nama_barang = $_POST['nama_barang'];
-        $harga = $_POST['harga'];
-        $satuan = $_POST['satuan'];
-        $keterangan = $_POST['keterangan'];
+if (isset($_POST['btn-simpan'])) {
+    $kode_barang = $_POST['kode_barang'];
+    $id_kategori = $_POST['id_kategori'];
+    $nama_barang = $_POST['nama_barang'];
+    $harga = $_POST['harga'];
+    $satuan = $_POST['satuan'];
+    $keterangan = $_POST['keterangan'];
 
-        $namafile = $_FILES['foto']['name'];
-        $ukuranfile = $_FILES['foto']['size'];
-        $error = $_FILES['foto']['error'];
-        $tmpname = $_FILES['foto']['tmp_name'];
+    $namafile = $_FILES['foto']['name'];
+    $ukuranfile = $_FILES['foto']['size'];
+    $error = $_FILES['foto']['error'];
+    $tmpname = $_FILES['foto']['tmp_name'];
 
         if ($error == 4) { // 4 adalah jumlah dari error
             echo "<script>alert('Pilih Gambar Dahulu');</script>";
@@ -412,12 +418,12 @@
             echo "<script>gagal();</script>";
         }
     }
-?>
+    ?>
 
-<!-- END -->
+    <!-- END -->
 
-<!-- Fungsi Hapus Data -->
-<?php
+    <!-- Fungsi Hapus Data -->
+    <?php
     if (isset($_POST['btn-hapus'])) {
         $kode_barang = $_POST['kode_barang'];
 
@@ -437,5 +443,5 @@
             echo "<script>gagal_hapus();</script>";
         }
     }
-?>
+    ?>
 <!-- END -->

@@ -61,7 +61,7 @@
 			break;
 
 		default:
-			echo "404 Not Found";
+			include 'page/404.php';
 			break;
 	}
 ?>

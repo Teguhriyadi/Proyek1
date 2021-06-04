@@ -87,25 +87,6 @@
             <span class="nav-link-text">Pembelian</span>
           </a>
         </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
-          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponentsTwo" data-parent="#exampleAccordion">
-            <i class="fa fa-fw fa-envelope"></i>
-            <span class="nav-link-text">Pesan</span>
-          </a>
-          <ul class="sidenav-second-level collapse" id="collapseComponentsTwo">
-            <li>
-              <a class="nav-link" href="?page=informasi">
-                <span class="nav-link-text">Informasi</span>
-              </a>
-            </li>
-            <li>
-              <a class="nav-link" href="?page=saran">
-                <span class="nav-link-text">Saran</span>
-              </a>
-            </li>
-          </ul>
-        </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Informasi">
           
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Users">
@@ -123,58 +104,6 @@
         </li>
       </ul>
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle mr-lg-2" id="messagesDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fa fa-fw fa-envelope"></i>
-            <span class="d-lg-none">Messages
-              <span class="badge badge-pill badge-primary">
-                <?php
-                $sql = "SELECT * FROM informasi WHERE status = 0";
-                $query = mysqli_query($con,$sql);
-                $count = mysqli_num_rows($query);
-                echo $count;
-                ?> Pesan Baru
-              </span>
-            </span>
-            <span class="indicator text-primary d-none d-lg-block">
-              <?php
-                $sql = "SELECT * FROM informasi WHERE status = 0 ";
-                $query = mysqli_query($con,$sql);
-                $count = mysqli_num_rows($query);
-              ?>
-
-              <?php if ($count == 0) : ?>
-
-              <?php else : ?>
-                <i class="fa fa-fw fa-circle"></i>
-              <?php endif ?>
-              
-            </span>
-          </a>
-          <div class="dropdown-menu" aria-labelledby="messagesDropdown">
-            <?php
-            $sql = "SELECT * FROM informasi WHERE status = 0 ";
-            $query = mysqli_query($con,$sql);
-            $count = mysqli_num_rows($query);
-
-            ?>
-            <h6 class="dropdown-header"><span class="badge badge-pill badge-primary"><?php echo $count; ?></span> Pesan Baru:</h6>
-            <div class="dropdown-divider"></div>
-            <?php
-            $query = $con->query("SELECT * FROM informasi JOIN users ON informasi.id_user = users.id WHERE status = 0");
-            ?>
-            <?php foreach ($query as $data_informasi) : ?>
-              <a class="dropdown-item" href="#">
-                <strong class="mr-2"><?php echo $data_informasi['username']; ?></strong><span class="badge badge-pill badge-success">New</span>
-                <span class="small float-right text-muted"><?php echo $data_informasi['created_at']; ?></span>
-                <div class="dropdown-message small"><?php echo $data_informasi['keterangan']; ?></div>
-              </a>
-              <div class="dropdown-divider"></div>
-            <?php endforeach ?>
-            
-            <a class="dropdown-item small" href="?page=informasi"><i class="fa fa-search"></i> Lihat Semua Pesan</a>
-          </div>
-        </li>
         <li class="nav-item">
           <form class="form-inline my-2 my-lg-0 mr-lg-2">
             <div class="input-group mt-2 text-white" style="text-transform: uppercase;">

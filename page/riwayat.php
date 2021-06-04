@@ -30,7 +30,15 @@ if (!isset($_SESSION["pelanggan"]) OR empty($_SESSION["pelanggan"])) {
 					<td class="text-center"><?php echo ++$no; ?>.</td>
 					<td class="text-center"><?php echo $pecah['tanggal_pembelian']; ?></td>
 					<td>
-						<?php echo $pecah['status_pembelian']; ?>
+						<?php if ($pecah['status_pembelian'] == "barang_dikirim") : ?>
+							Barang Dikirim
+						<?php elseif($pecah['status_pembelian'] == "pending") : ?>
+							Pending
+						<?php elseif($pecah['status_pembelian'] == "sudah kirim pembayaran") : ?>
+							Sudah Kirim Pembayaran
+						<?php else : ?>
+							Tidak Ada
+						<?php endif ?>
 						<br>
 						<?php if (!empty($pecah['resi_pengiriman'])) : ?>
 							Resi : <?php echo $pecah['resi_pengiriman']; ?>

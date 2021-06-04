@@ -19,5 +19,5 @@
 <input type="hidden" name="id_kategori" value="<?php echo $edit['id_kategori']; ?>">
 <div class="form-group">
 	<label class="nama_kategori"> Nama Kategori </label>
-	<input type="text" id="nama_kategori" class="form-control" name="nama_kategori" placeholder="Masukkan Nama Kategori" value="<?php echo $edit['nama_kategori']; ?>">
+	<input type="text" id="nama_kategori" class="form-control" name="nama_kategori" placeholder="Masukkan Nama Kategori" value="<?php echo $edit['nama_kategori']; ?>" autocomplete="off">
 </div>

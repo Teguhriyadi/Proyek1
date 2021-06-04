@@ -127,6 +127,8 @@
                                         Gudang
                                     <?php elseif ($data_users['level'] == 'kasir') : ?>
                                         Kasir
+                                    <?php elseif ($data_users['level'] == 'informan') : ?>
+                                        Informan
                                     <?php else : ?>
                                         Tidak Ada
                                     <?php endif ?>
@@ -191,6 +193,7 @@
                             <option value="admin">Admin</option>
                             <option value="gudang">Gudang</option>
                             <option value="kasir">Kasir</option>
+                            <option value="informan">Informan</option>
                         </select>
                     </div>
                 </div>

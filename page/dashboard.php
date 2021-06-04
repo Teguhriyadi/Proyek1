@@ -14,13 +14,6 @@
 		<div class="col-md-4">
 			<h1><i class="fa fa-shopping-cart"></i> Produk</h1>
 		</div>
-		<div class="col-md-8 mt-2">
-			<form>
-				<div class="form-group">
-					<input type="text" class="form-control" name="" placeholder="Cari Produk Yang Kamu Inginkan">
-				</div>
-			</form>
-		</div>
 	</div>
 	<hr>
 	<div class="row">

@@ -18,7 +18,7 @@ if ($page == "logout") {
         $date = date("Y-m-d H:i:s");
         $con->query("UPDATE users SET last_login = '$date' WHERE username = '$username' ");
             // menghapus semua session
-        session_destroy();
+        unset($_SESSION['login-admin']);
 
         // mengalihkan halaman ke halaman login
         echo "<script>alert('Berhasil Logout');</script>";
@@ -28,7 +28,7 @@ if ($page == "logout") {
 } else {
     session_start();
     if (isset($_SESSION['login-admin'])) {
-        echo "<script>alert('Logout dulu kuy');</script>";
+        echo "<script>alert('Logout dulu');</script>";
         echo "<script>location='../?page=dashboard';</script>";
         exit;
     } else {

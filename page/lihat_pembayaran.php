@@ -45,3 +45,4 @@ if ($_SESSION["pelanggan"]["id_pelanggan"]!==$detbay["id_pelanggan"]) {
 		</div>
 	</div>
 </div>
+<br>

@@ -1,10 +1,10 @@
 <?php
 
-    if (!defined('access')) {
-        echo "<script>alert('Maaf, Anda Tidak Berhak Masuk Ke Halaman Ini');</script>";
-        echo "<script>window.location.replace('../../?page=dashboard');</script>";
-        exit;
-    }
+if (!defined('access')) {
+    echo "<script>alert('Maaf, Anda Tidak Berhak Masuk Ke Halaman Ini');</script>";
+    echo "<script>window.location.replace('../../?page=dashboard');</script>";
+    exit;
+}
 
 ?>
 <script type="text/javascript">
@@ -92,7 +92,7 @@
 </script>
 
 <?php
-    $id_pembelian = $_GET['id_pembelian'];
+$id_pembelian = $_GET['id_pembelian'];
 ?>
 
 <div class="container-fluid">
@@ -115,44 +115,77 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th class="text-center">No.</th>
                             <th>Nama Pelanggan</th>
+                            <th class="text-center">Bank</th>
+                            <th class="text-center">Jumlah</th>
                             <th class="text-center">Tanggal</th>
-                            <th class="text-center">Status Pembelian</th>
-                            <th class="text-center">Total</th>
                             <th class="text-center">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-                        $no = 0;
-                        $query = $con->query("SELECT * FROM pembelian JOIN pelanggan ON pembelian.id_pelanggan = pelanggan.id_pelanggan");
-                        $bgcolor = "";
+                        $id_pembelian = $_GET['id_pembelian'];
 
+                        $query = $con->query("SELECT * FROM pembayaran WHERE id_pembelian = '$id_pembelian'");
+
+                        $data = $query->fetch_assoc();
                         ?>
-                        <?php foreach ($query as $data_pembelian) : ?>
-                            <?php 
-                            if ($no % 2 == 0) {
-                                $bgcolor = "#F0F0F0";
-                            } else {
-                                $bgcolor = "";
-                            }
-                            ?>
-                            <tr bgcolor="<?php echo $bgcolor; ?>">
-                                <td class="text-center"><?php echo ++$no; ?>.</td>
-                                <td><?php echo $data_pembelian['nama_pelanggan'] ?></td>
-                                <td class="text-center"><?php echo $data_pembelian['tanggal_pembelian'] ?></td>
-                                <td class="text-center"><?php echo $data_pembelian['status_pembelian']; ?></td>
-                                <td class="text-center">Rp. <?php echo number_format($data_pembelian['total_pembelian']); ?></td>
-                                <td class="text-center"></td>
-                            </tr>
-                        <?php endforeach ?>
+                        <tr>
+                            <td><?php echo $data['nama_pelanggan']; ?></td>
+                            <td><?php echo $data['bank']; ?></td>
+                            <td>Rp. <?php echo number_format($data['jumlah']); ?></td>
+                            <td class="text-center"><?php echo $data['tanggal']; ?></td>
+                            <td class="text-center">
+                                <img src="bukti_pembayaran/<?php echo $bukti_pembayaran; ?>">
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
+            <form method="POST">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label> No. Pengiriman </label>
+                            <input type="number" class="form-control" name="no_pengiriman" placeholder="0">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label> Status </label>
+                            <select class="form-control" name="status_pembelian">
+                                <option value="">- Pilih -</option>
+                                <option value="lunas"> Lunas </option>
+                                <option value="barang_dikirim"> Barang Dikirim </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="submit" name="btn-proses" class="btn btn-success btn-sm">
+                        <i class="fa fa-money"></i> Proses
+                    </button>
+                </div>
+            </form>
+            <?php
+                if (isset($_POST['btn-proses'])) {
+                    $no_pengiriman = $_POST['no_pengiriman'];
+                    $status_pembelian = $_POST['status_pembelian'];
+
+                    $query = $con->query("UPDATE pembelian SET status_pembelian = '$status_pembelian' , resi_pengiriman = '$no_pengiriman' WHERE id_pembelian = '$id_pembelian' ");
+
+                    if ($query != 0) {
+                        echo "<script>alert('Data Berhasil di Ubah');</script>";
+                        echo "<script>window.location.replace('?page=pembelian');</script>";
+                    } else {
+                        echo "<script>alert('Data Gagal di Ubah');</script>";
+                        echo "<script>window.location.replace('?page=pembayaran&id_pembelian=$id_pembelian');</script>";
+                    }
+                }
+            ?>
         </div>
     </div>
 </div>
@@ -196,7 +229,7 @@
             </div>
             <form method="POST" action="?page=aksi-edit-kategori">
                 <div class="modal-body" id="modal-update">
-                    
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal"><i class="fa fa-refresh"></i> Batal</button>
@@ -210,40 +243,40 @@
 
 <!-- Fungsi Tambah Kategori -->
 <?php
-    if (isset($_POST['btn-simpan'])) {
-        $nama_kategori = $_POST['nama_kategori'];
+if (isset($_POST['btn-simpan'])) {
+    $nama_kategori = $_POST['nama_kategori'];
 
-        $result = $con->query("SELECT nama_kategori FROM kategori WHERE nama_kategori = '$nama_kategori'");
+    $result = $con->query("SELECT nama_kategori FROM kategori WHERE nama_kategori = '$nama_kategori'");
 
-        if (mysqli_fetch_assoc($result) > 0) {
-            echo "<script>alert('Tidak Boleh Ada Duplikasi Data');</script>";
-            echo "<script>location='?page=kategori';</script>";
-            exit;
-        }
-
-        $query = $con->query("INSERT INTO kategori VALUES ('','$nama_kategori', '')");
-
-        if ($query != 0) {
-            echo "<script>berhasil();</script>";
-        } else {
-            echo "<script>gagal();</script>";
-        }
+    if (mysqli_fetch_assoc($result) > 0) {
+        echo "<script>alert('Tidak Boleh Ada Duplikasi Data');</script>";
+        echo "<script>location='?page=kategori';</script>";
+        exit;
     }
+
+    $query = $con->query("INSERT INTO kategori VALUES ('','$nama_kategori', '')");
+
+    if ($query != 0) {
+        echo "<script>berhasil();</script>";
+    } else {
+        echo "<script>gagal();</script>";
+    }
+}
 ?>
 <!-- END -->
 
 <!-- Fungsi Hapus Kategori -->
 <?php
-    if (isset($_POST['btn-hapus'])) {
-        $id_kategori = $_POST['id_kategori'];
+if (isset($_POST['btn-hapus'])) {
+    $id_kategori = $_POST['id_kategori'];
 
-        $query = $con->query("DELETE FROM kategori WHERE id_kategori = $id_kategori");
+    $query = $con->query("DELETE FROM kategori WHERE id_kategori = $id_kategori");
 
-        if ($query != 0) {
-            echo "<script>berhasil_hapus();</script>";
-        } else {
-            echo "<script>gagal_hapus();</script>";
-        }
+    if ($query != 0) {
+        echo "<script>berhasil_hapus();</script>";
+    } else {
+        echo "<script>gagal_hapus();</script>";
     }
+}
 ?>
 <!-- END -->

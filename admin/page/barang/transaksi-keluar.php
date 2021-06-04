@@ -26,5 +26,5 @@
 </div>
 <div class="form-group">
     <label for="jumlah"> QTY </label>
-    <input type="number" id="jumlah" name="stok" class="form-control" placeholder="0" autocomplete="off">
+    <input type="number" id="jumlah" name="stok" class="form-control" placeholder="0" min="1" max="" autocomplete="off">
 </div>
